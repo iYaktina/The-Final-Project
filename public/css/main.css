@@ -1,0 +1,498 @@
+@import url('https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap');
+
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+
+}
+:root{
+  --primary:#00c2de;
+}
+
+body{
+    background: #000000;
+    font-family: "Racing Sans One", sans-serif;
+}
+/*el spacing wel positioning bta3 kol 7aga foo2  */
+header{
+    position: absolute ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+    z-index: 1000;
+    place-items: center ;
+    
+}
+
+/* el line ely 3la el 4emal */
+header::after {
+position: absolute;
+width: 40%;
+height: 5px;
+left: 100px;
+top: 50%;
+transform: translateY(-50%);
+content: '';
+background: linear-gradient(90deg,red,transparent);
+}
+
+/* el font wel sizing bta3 el year w el spacing w kda  */
+header .year{
+    font-family: "Racing Sans One", cursive;
+    font-size:1em;
+    color: #ffffff;
+    letter-spacing:1px;
+    font-weight: 900;
+    margin-top: 30px;
+}
+
+/*el logo zat nfso */
+.logo{
+font-size: 30px;
+color: whitesmoke;
+background: transparent;
+}
+
+.logo img{
+    position: absolute;
+    top: 0;
+    left: 50%; 
+    transform: translateX(-50%);
+    max-width: 150px; 
+    height: auto; 
+    background: transparent;
+}
+
+/*hena design el icons w kda el height wel width bt3at icon el menu */
+header .menu{
+position: relative;
+height: 30px;
+width:30px;
+background:url('../images/menu-3-fill.png') no-repeat;
+background-size: 30px;
+background-position: center;
+filter:invert(1);
+cursor: pointer;
+}
+
+
+/* hena design el icon b3d lma bft7 el menu */
+header .menu.active{
+    position: relative;
+    height: 30px;
+    width:30px;
+    background:url('../images/close-line.png') no-repeat;
+    background-size: 30px;
+    background-position: center;
+    filter:invert(1);
+    cursor: pointer;
+}
+/* lma tege tft7 el menu w kda el 7agat httl3 ezay w 4klha w kda w el line ely foo2eha */
+/*  w kman en el kalam yzhr wel transition bta3o w kda  */
+.nav{
+z-index:200;
+position: absolute;
+right:100px;
+top: 0;
+width: 30%;
+height: 5px;
+border-bottom: 5px solid;
+border-image: linear-gradient(90deg
+,transparent
+,var(--primary),
+var(--primary)) 30;
+background: transparent;
+box-shadow: 0 0 40px rgba(0,0,0,0.5);
+backdrop-filter: blur(20px);
+display: flex;
+justify-content: center;
+align-items: center;
+transition:1s;
+transform-origin: right;
+}
+
+/* hena bnupdate el line eno ynzl t7t lma nft7 el menu 
+w el kalam kman ynzl m3ah 34an homa same class fa el line lw mznl4 el kalam m4 hynzl */
+.nav.active{
+    top:100px;
+    width: 40%;
+    height: 100px;
+    border-top: 5px solid;
+   border-image: linear-gradient(90deg
+,transparent
+,var(--primary),
+var(--primary),
+transparent) 30;
+    border-bottom: none;
+
+}
+
+
+/* de ely bt5ly el kalam bta3 el menu yfdl hidden until el active phase  */
+.nav li{
+    position: relative;
+    list-style: none;
+opacity: 0;
+visibility: hidden;
+transform : translateY(-100px);
+transition: 0.5s;
+}
+/* bn3ml show lel kalam w kda */
+.nav.active li{
+transform:translateY(0);
+visibility: visible;
+opacity: 1;
+}
+
+/*Hena b2a bnzbt el design bta3 el kalam fonts w kda wel alignment bta3o wel colour wel spacing */
+.nav li a{
+    text-decoration: none;
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 200;
+    letter-spacing: 1px;
+    padding: 5px 20px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+/* w hena lma no2af 3leeh ytl3 box shadow  */
+.nav li a:hover{
+    box-shadow: inset 0 0 20px rgba(0,194,222,0.5);
+}
+
+/*  background    */
+.banner {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 100px;
+    display:  flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5s;
+}
+/*w hena kona 3mleen el background tb2a darker sena for aesthtic*/
+.banner::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background:radial-gradient(rgba(0,0,0,0.1),
+    rgba(0,0,0,0.3),
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.9)
+    );
+}
+
+/* w hena 3mlna line ely 3la el 4emal for design w kda */
+.banner::before{
+position: absolute;
+content: '';
+top: 25%;
+left: 0;
+width: 5px;
+height: 40%;
+background: linear-gradient(var(--primary),transparent);
+z-index: 100;
+}
+
+/*el videohat ely htb2a 3la el back ground */
+.banner .bg-video{
+display: none;
+position: absolute;
+content: '';
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center;
+}
+/*hena lma tkoon active hn3rdha 34an normally m4 m3rooda 34an fe kza video */
+.banner .bg-video.active{
+    display: block;
+}
+
+
+/* default setting lel content ely htb2a mktooba 3la el background */
+.banner .content{
+    position: relative;
+    max-width: 700px;
+    padding-bottom: 200px;
+    z-index: 100;
+}
+
+/* w hena byb2a el car brand zat nfso  */
+.banner .content h1{
+    font-family: "Racing Sans One", cursive;
+    font-size: 10em;
+    color: #ffffff;
+    font-weight: 500;
+    line-height: 0.8em;
+    letter-spacing: 5px;
+}
+/*EL model bta3 el 3rbya ely byb2a mktoob */
+.banner .content .model{
+font-size: 4em;
+text-transform: uppercase;
+color:var(--primary);
+display: none;
+    
+}
+/* 34an a3mlo show  */
+.banner .content .model.active{
+display: block;
+}
+
+/* hena el paragraph ely hnktb feeh description 3n el 3rbya */
+.banner .content p{
+color:#ffffff;
+font-size: 200;
+letter-spacing: 1px;
+margin-bottom: 25px;
+
+
+}
+
+/* design el button  */
+.banner .content a{
+position: relative;
+width: 200px;
+color:#ffffff;
+text-decoration: none;
+padding:15px 40px;
+background: transparent;
+border-bottom: 3px solid;
+border-image: linear-gradient(90deg,
+transparent,
+var(--primary),
+var(--primary,transparent))
+30;
+box-shadow: inset 0 0 10px rgba(0,194,222,0.5);
+backdrop-filter: blur(20px);
+text-transform:  uppercase;
+font-size: 1.2em;
+font-weight: 300;
+letter-spacing: 1px;
+transition: 0.5s;
+}
+
+/* lma 2b2a wa2ef 3la el button */
+.banner .content a:hover{
+    box-shadow: inset 0 0 50px rgba(0,194,222,0.5);
+}
+
+/* el video show casing wel 3d modeling  */
+.banner .screen{
+    position: absolute;
+    right: 10%;
+    bottom: 100px;
+    width: 300px;
+    height: 200px;
+    transform-style: preserve-3d;
+    animation:animate 30s linear infinite;
+    z-index: 100;
+}
+
+/* 34an yb2a animated w ylef 7wleen nfso  */
+@keyframes animate{
+0%{
+    transform: rotateX(-35deg) rotateY(0deg);
+}
+100%{
+    transform: rotateX(-35deg) rotateY(360deg);
+
+}
+}
+
+/* box el videos ely t7t 3la el yemen */
+/*de ely 3mlna 3leeha en el style yb2a 3d w kda */
+.screen div{
+position: absolute;
+top:0  ;
+left: 0;
+width: 100%;
+height: 100%;
+transform-style: preserve-3d;
+}
+/* hena 3mlna en el design yb2a squared 7wleen nfso 3n tree2 variable el i  */
+.screen div span{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+background: linear-gradient(transparent,var(--primary));
+transform: rotateY(calc(90deg*var(--i))) translateZ(150px);
+} 
+
+/* el shadow ely t7t el box ely feeh el videos  */
+.shadow{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 200px;
+    background: var(--primary);
+    transform: rotateX(-90deg) translateZ(150px);
+    filter: blur(20px);
+    box-shadow: 0 0 120px rgba(0,194,222,0.2),rgba(0,194,222,0.4)
+    ,rgba(0,194,222,0.6)
+    ,rgba(0,194,222,0.8)
+    ,rgba(0,194,222,1.0);
+}
+
+/* en el video yb2a fit 3la el square  */
+.screen div span video{
+    position: absolute;
+    bottom: 0;
+    height: 75%;
+    width: 100%;
+    transition: 0.5s;
+    object-fit: cover;
+    object-position: center;
+
+}
+
+/* 34an n3rf n48l el function bt3tna ely bt7ot which trailer yb2a 4a8al 3la el screen */
+.trailer{
+    display: none;
+}
+
+.trailer.active{
+display: block;
+}
+
+/* el sewar ely e7na 7tenha t7t el banner bt3ha  */
+.banner .gallery{
+    position: absolute;
+    content: '';
+    left: 100px;
+    bottom: 0;
+    width: 55%;
+    height: 30%;
+    z-index: 100;
+    background: transparent;
+    box-shadow: 0px 10px 40px rgba(0,0,0,0.5),
+    0px -10px 40px rgba(0,0,0,0.5);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* el lighting ely mwgood t7t el banner bt3na  */
+.banner .gallery::before{
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    height: 10px;
+    width: 100%;
+    background: var(--primary);
+    filter: blur(15px);
+}
+
+
+.banner .gallery .carousel{
+    width: 100%;
+    height: 100%;
+}
+/* el size bta3 el sora  */
+.carousel .carousel-item{
+    width: 250px;
+    cursor: pointer;
+}
+/* el fitting bt3ha  */
+.carousel .carousel-item img{
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* el text ely bttktb t7t kol sora  */
+.carousel .carousel-item h4{
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.3em;
+    font-weight: 300;
+    letter-spacing: 1px;
+} 
+
+/*Social Icons */
+.sci{
+    position: absolute;
+    top: 50%;
+    right: 100px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.sci li{
+    list-style: none;
+}
+
+.sci li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2em;
+    transition: 0.3s;
+}
+
+.sci li a:hover{
+color:var(--primary);
+
+}
+
+
+/* hn3ml el video play w pause button */
+/* el buttons 3mleen en el pause wel play el etnen hidden w t7t hn3ml one shown w hidden 3la 7asab hndoos anhy w da fel java script hn3ml el function
+ */
+.banner .play,
+.banner .pause{
+    display: none;
+    position: absolute;
+    left: 70%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    color: var(--primary);
+    font-size: 8em;
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0.3;
+    transition: 0.3s;
+}
+
+.banner .play:hover,
+.banner .pause:hover{
+    color: #ffffff;
+    opacity: 1;
+}
+
+.banner .play.active{
+    display: block;
+}
+
+.banner .pause.active{
+    display: block;
+}
+

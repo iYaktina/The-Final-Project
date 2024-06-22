@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+   :root{
+     --primary:#00c2de;
+   }
+   
+   body{
+       background: #000000;
+       font-family: "Racing Sans One", sans-serif;
+   }
+
+   header{
+    position: absolute ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 100px;
+    z-index: 1000;
+    place-items: center ;
+    
+}
+
+
+header::after {
+position: absolute;
+width: 40%;
+height: 5px;
+left: 100px;
+top: 50%;
+transform: translateY(-50%);
+content: '';
+background: linear-gradient(90deg,red,transparent);
+}
+
+
+
+/*el logo zat nfso */
+.logo{
+font-size: 30px;
+color: whitesmoke;
+background: transparent;
+}
+
+.logo img{
+    position: absolute;
+    top: 0;
+    left: 50%; 
+    transform: translateX(-50%);
+    max-width: 150px; 
+    height: auto; 
+    background: transparent;
+}
+.nav{
+    z-index:200;
+    position: absolute;
+    right:100px;
+    top: 0;
+    width: 30%;
+    height: 5px;
+    border-bottom: 5px solid;
+    border-image: linear-gradient(90deg
+    ,transparent
+    ,var(--primary),
+    var(--primary)) 30;
+    background: transparent;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition:1s;
+    transform-origin: right;
+    }
+
+.form_container{
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:101 ;
+    background: #fff;
+    padding: 25px;
+    border-radius:  12px;
+    box-shadow:#0b0217;
+    max-width: 430px;
+    width:100%;
+  
+  
+}
+.form_container a:hover{
+    text-decoration: underline;
+}
+.form_closer{
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #0b0217;
+    font-size: 22px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+
+.form_container h2{
+    font-size: 28px;
+    text-align: center;
+}
+.input_box{
+    position: relative;
+    margin-top: 30px;
+    width:100%;
+    height: 40px;
+
+}
+
+.input_box input{
+    height: 100%;
+    width:100%;
+    border:none;
+    padding: 0 30px;
+    outline: none;
+    transition: all 0.2s ease;
+    border-bottom: 1.5px solid #aaaaaa;
+    color:#333 ;
+  
+    
+}
+
+.input_box input:focus{
+    border-color: #53c8b2;
+}
+
+.input_box i{
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size: 20px;
+    left: 0;
+    border-color: #53c8b2;
+}
+
+.input_box input:focus ~ i
+
+{
+   color: #53c8b2;
+}
+
+.form-link{
+    margin-top: 14px;
+    display: 14px;
+    align-items: center;
+    justify-content: space-between;
+    position: center;
+}
+.form-link a{
+    color: #53c8b2;
+    font-size: 13px;
+}
+
+
+.signup{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+
+}
+.form_container
+.signup-button{
+background: #53c8b2;
+margin-top: 30px;
+width: 100%;
+padding:10px 0 ;
+border-radius: 10px;
+}
+
+
+
+
+  
+
+
+
+
+  

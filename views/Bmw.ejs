@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- 7tet da 34an n2dr n3ml el gallery showcase ely t7t  -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<!-- 7tet da 34an n2dr n3ml el icons w kda -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+			integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="../public/css/main.css" />
+		<title>Wheels and Deals | Sport Cars Website</title>
+	</head>
+	<body>
+		<!--Header-->
+		<header>
+			<span class="year">2010-2024</span>
+			<a href="/" class="logo"
+				><img src="../public/images/logo.jpg" alt="logo"
+			/></a>
+			<a href="#" class="menu" onclick="toggleMenu();"></a>
+		</header>
+		<div class="banner">
+			<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
+
+			<!-- Script tag for client-side JavaScript -->
+			<script>
+				var isLoggedIn = <%= JSON.stringify(isLoggedIn) %>;
+			</script>
+			<div class="bg-video-list">
+				<video
+					class="bg-video BMW-1 active"
+					src="../public/assests/Bmw/BMW M3 G80 _ CAP CUT _ CAR EDIT _ 4K (1080p60).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video BMW-2"
+					src="../public/assests/Bmw/M5-1.mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video BMW-3"
+					src="../public/assests/Bmw/BMW X6 M - Orquestra Maldita - EDIT 4K! (1080p60).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video BMW-4"
+					src="../public/assests/Bmw/BMW XM - Interior. (1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+			</div>
+			<div class="content">
+				<h1>BMW</h1>
+				<h3
+					class="model BMW-1 active"
+					data-image="../public/images/BMWm3cs.jpeg"
+					data-video="../public/assests/Bmw/BMW M3 G80 _ CAP CUT _ CAR EDIT _ 4K (1080p60).mp4"
+				>
+					BMW M3 CS
+				</h3>
+				<h3
+					class="model BMW-2"
+					data-image="../public/images/BMWm5cs.jpeg"
+					data-video="../public/assests/Bmw/M5-1.mp4"
+				>
+					BMW M5 CS
+				</h3>
+				<h3
+					class="model BMW-3"
+					data-image="../public/images/BMWx6.jpeg"
+					data-video="../public/assests/Bmw/BMW X6 M - Orquestra Maldita - EDIT 4K! (1080p60).mp4"
+				>
+					BMW X6
+				</h3>
+				<h3
+					class="model BMW-4"
+					data-image="../public/images/BMWxm.jpeg"
+					data-video="../public/assests/Bmw/BMW XM - Interior. (1080p).mp4"
+				>
+					BMW XM
+				</h3>
+				<p></p>
+				<a href="#" onclick="openCustomizationPage()"
+					>View More Details</a
+				>
+			</div>
+			<a href="#" class="pause active" onclick="pauseVideo()">
+				<i class="bi bi-pause-circle"></i>
+			</a>
+			<a href="#" class="play" onclick="playVideo()">
+				<i class="bi bi-play-circle"></i>
+			</a>
+			<div class="screen">
+				<div class="shadow"></div>
+				<div>
+					<span style="--i: 0">
+						<video
+							class="trailer BMW-1 screen-video active"
+							src="../public/assests/Bmw/BMW M3 G80 _ CAP CUT _ CAR EDIT _ 4K (1080p60).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer BMW-2 screen-video"
+							src="../public/assests/Bmw/M5-1.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer BMW-3 screen-video"
+							src="../public/assests/Bmw/BMW X6 M - Orquestra Maldita - EDIT 4K! (1080p60).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer BMW-4 screen-video"
+							src="../public/assests/Bmw/BMW XM - Interior. (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 1">
+						<video
+							class="screen-video"
+							src="../public/assests/Bmw/BMW XM - Exterior. (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 2">
+						<video
+							class="screen-video"
+							src="../public/assests/Bmw/The all-new BMW X6. Official Launch Film. (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 3">
+						<video
+							class="screen-video"
+							src="../public/assests/Bmw/KSLV - Override (BMW M8 Gran Coupe) 4K EDIT (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+				</div>
+			</div>
+			<div class="gallery">
+				<div class="carousel">
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('BMW-1');"
+					>
+						<img
+							src="../public/images/BMWm3cs.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: #686a6c">BMW M3 CS</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('BMW-2');"
+					>
+						<img
+							src="../public/images/BMWm5cs.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: #3f3f3f">BMW M5 CS</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('BMW-3');"
+					>
+						<img
+							src="../public/images/BMWx6.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: silver">BMW X6</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('BMW-4');"
+					>
+						<img
+							src="../public/images/BMWxm.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: #87ceeb">BMW XM</h4>
+					</a>
+				</div>
+			</div>
+		</div>
+		<ul class="sci">
+			<li>
+				<a href="#"><i class="bi bi-facebook"></i></a>
+			</li>
+			<li>
+				<a href="#"><i class="bi bi-instagram"></i></a>
+			</li>
+			<li>
+				<a href="#"><i class="bi bi-youtube"></i></a>
+			</li>
+		</ul>
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script src="../public/js/script.js"></script>
+	</body>
+</html>

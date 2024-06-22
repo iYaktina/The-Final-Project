@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>User Account Information</title>
+		<link rel="stylesheet" href="../public/css/user.css" />
+		<link rel="stylesheet" href="../public/css/main.css" />
+	</head>
+	<body>
+		<header>
+			<span class="year">2010-2024</span>
+			<a href="/" class="logo"
+				><img src="../public/images/logo.jpg" alt="logo"
+			/></a>
+			<a href="#" class="menu" onclick="toggleMenu();"></a>
+		</header>
+		<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
+		<script>
+			// Pass loggedInUser._id to JavaScript
+			const userId = "<%= loggedInUser._id %>";
+		</script>
+		<div class="container">
+			<div class="title">User Account Information</div>
+
+			<!-- Buttons to reveal sections -->
+			<div class="button-container">
+				<button class="button" onclick="toggleSection('personal-info')">
+					Personal Info
+				</button>
+				<button class="button" onclick="toggleSection('add-photo')">
+					Add Photo
+				</button>
+				<button class="button" onclick="toggleSection('order-history')">
+					Order History
+				</button>
+				<button class="button" onclick="toggleSection('order-status')">
+					Order Status
+				</button>
+				<button
+					class="button"
+					onclick="toggleSection('payment-method')"
+				>
+					Payment Method
+				</button>
+				<button class="button" onclick="toggleSection('address')">
+					Address
+				</button>
+			</div>
+
+			<!-- User Profile Section (for Add Photo) -->
+			<div id="add-photo" class="header hidden">
+				<div
+					class="image-box"
+					onclick="document.getElementById('profile-picture').click()"
+				>
+					<img id="profileImage" src="#" alt="User Picture" />
+					<span>+ Add Photo</span>
+				</div>
+				<input
+					type="file"
+					id="profile-picture"
+					name="profile-picture"
+					accept="image/*"
+					onchange="previewImage(event)"
+				/>
+			</div>
+
+			<!-- Personal Information Section -->
+			<div id="personal-info" class="section">
+				<h2>Personal Information</h2>
+				<form id="personal-info-form">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							placeholder="Enter your name"
+							disabled
+						/>
+						<span class="edit-icon" onclick="enableEdit('name')"
+							>✏️</span
+						>
+					</div>
+					<div class="form-group">
+						<label for="username">Username</label>
+						<input
+							type="text"
+							id="username"
+							name="username"
+							placeholder="Enter your username"
+							disabled
+						/>
+						<span class="edit-icon" onclick="enableEdit('username')"
+							>✏️</span
+						>
+					</div>
+					<div class="form-group">
+						<label for="birthyear">Birth Year</label>
+						<input
+							type="text"
+							id="birthyear"
+							name="birthyear"
+							placeholder="Enter your birth year"
+							disabled
+						/>
+						<span
+							class="edit-icon"
+							onclick="enableEdit('birthyear')"
+							>✏️</span
+						>
+					</div>
+					<button type="submit" class="button">Save Changes</button>
+				</form>
+			</div>
+		</div>
+
+		<script src="../public/js/userinfo.js"></script>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+<ul class="nav" onclick="toggleMenu();">
+	<% if (loggedInUser) { %> <% if (loggedInUser.role === "admin") { %>
+	<li><a href="/logout">Logout</a></li>
+	<li><a href="/account">Account Information</a></li>
+	<li><a href="/viewall">View All</a></li>
+	<% } else { %>
+	<li><a href="/logout">Logout</a></li>
+	<li><a href="/Accountinfo">Account Information</a></li>
+	<% } %> <% } else { %>
+	<li><a href="/login">Login</a></li>
+	<li><a href="/signup">Sign Up</a></li>
+	<% } %>
+	<li><a href="/about">About Us</a></li>
+	<li><a href="/contact">Contact Us</a></li>
+	<li><a href="/">Home</a></li>
+</ul>

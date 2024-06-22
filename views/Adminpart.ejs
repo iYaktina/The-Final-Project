@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin Panel</title>
+		<link rel="stylesheet" href="../public/css/Admin.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Admin Panel</h1>
+			<div class="menu">
+				<button onclick="showSection('add-user')">Add User</button>
+				<button onclick="showSection('edit-user')">Edit User</button>
+				<button onclick="showSection('remove-user')">
+					Remove User
+				</button>
+				<button onclick="showSection('add-car')">Add Car</button>
+				<button onclick="showSection('edit-car')">Edit Car</button>
+				<button onclick="showSection('remove-car')">Remove Car</button>
+			</div>
+
+			<div id="add-user" class="admin-container">
+				<h2>Add User</h2>
+				<form id="addUserForm" action="/addUser" method="POST">
+					<label for="username">Username:</label>
+					<input type="text" id="username" name="username" required />
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" required />
+					<label for="password">Password:</label>
+					<input
+						type="password"
+						id="password"
+						name="password"
+						required
+					/>
+					<label for="passwordConfirm">Confirm Password:</label>
+					<input
+						type="password"
+						id="passwordConfirm"
+						name="passwordConfirm"
+						required
+					/>
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+
+			<div id="edit-user" class="admin-container">
+				<h2>Edit User</h2>
+				<form id="editUserForm" action="/editUser" method="POST">
+					<label for="editUserId">User ID:</label>
+					<input type="text" id="editUserId" name="editUserId" />
+					<label for="editUsername">New Username:</label>
+					<input type="text" id="editUsername" name="editUsername" />
+					<label for="editEmail">New Email:</label>
+					<input type="email" id="editEmail" name="editEmail" />
+					<label for="editPassword">New Password:</label>
+					<input
+						type="password"
+						id="editPassword"
+						name="editPassword"
+					/>
+					<button type="submit">Edit User</button>
+				</form>
+			</div>
+
+			<div id="remove-user" class="admin-container">
+				<h2>Remove User</h2>
+				<form id="removeUserForm" action="/removeUser" method="POST">
+					<label for="removeUserId">User ID:</label>
+					<input
+						type="text"
+						id="removeUserId"
+						name="removeUserId"
+						required
+					/>
+					<button type="submit">Remove User</button>
+				</form>
+			</div>
+
+			<div id="add-car" class="admin-container">
+				<h2>Add Car</h2>
+				<form
+					id="addCarForm"
+					action="/addCar"
+					method="POST"
+					enctype="multipart/form-data"
+				>
+					<label for="carBrand">Car Brand:</label>
+					<select
+						id="carBrand"
+						name="carBrand"
+						onchange="updateCarModels()"
+					>
+						<option value="">Select Car Brand</option>
+						<option value="BMW">BMW</option>
+						<option value="Porsche">Porsche</option>
+						<option value="Mercedes">Mercedes</option>
+						<option value="Range Rover">Range Rover</option>
+						<option value="McLaren">McLaren</option>
+					</select>
+					<label for="carModel">Car Model:</label>
+					<select id="carModel" name="carModel">
+						<option value="">Select Car Model</option>
+						<option value="Porsche 928">Porsche 928</option>
+						<option value="Porsche 911 GT3 RS">
+							Porsche 911 GT3 RS
+						</option>
+						<option value="Porsche Cayenne">Porsche Cayenne</option>
+						<option value="Porsche Boxter 718">
+							Porsche Boxter 718
+						</option>
+						<option value="BMW M5 CS">BMW M5 CS</option>
+						<option value="BMW M3 CS">BMW M3 CS</option>
+						<option value="BMW X6">BMW X6</option>
+						<option value="BMW XM">BMW XM</option>
+						<option value="Mercedes S-Class">
+							Mercedes S-Class
+						</option>
+						<option value="Mercedes G-Class">
+							Mercedes G-Class
+						</option>
+						<option value="Mercedes AMG GT">Mercedes AMG GT</option>
+						<option value="Mercedes GLS">Mercedes GLS</option>
+					</select>
+					<label for="manufacturYear">Manufacturing Year:</label>
+					<input
+						type="text"
+						id="manufacturYear"
+						name="manufacturYear"
+					/><br /><br />
+					<label for="carDescription">Description:</label>
+					<textarea
+						id="carDescription"
+						name="carDescription"
+						rows="4"
+						cols="50"
+					></textarea
+					><br /><br />
+					<label for="carPrice">Car Price:</label>
+					<input
+						type="number"
+						id="carPrice"
+						name="carPrice"
+					/><br /><br />
+					<label for="carImages">Product Images:</label>
+					<input
+						type="file"
+						id="carImages"
+						name="carImages"
+						multiple
+						accept="image/*"
+					/><br />
+					<label for="carVideos">Product Videos:</label>
+					<input
+						type="file"
+						id="carVideos"
+						name="carVideos"
+						multiple
+						accept="video/*"
+					/><br />
+					<button type="submit">Submit Changes</button>
+				</form>
+			</div>
+
+			<div id="edit-car" class="admin-container">
+				<h2>Edit Car</h2>
+				<form
+					id="editCarForm"
+					action="/editCar"
+					method="POST"
+					enctype="multipart/form-data"
+				>
+					<label for="carBrand">Car Brand:</label>
+					<select
+						id="carBrand"
+						name="carBrand"
+						onchange="updateCarModels()"
+					>
+						<option value="">Select Car Brand</option>
+						<option value="BMW">BMW</option>
+						<option value="Porsche">Porsche</option>
+						<option value="Mercedes">Mercedes</option>
+						<option value="Range Rover">Range Rover</option>
+						<option value="McLaren">McLaren</option>
+					</select>
+					<label for="carModel">Car Model:</label>
+					<select id="carModel" name="carModel">
+						<option value="">Select Car Model</option>
+						<option value="Porsche 928">Porsche 928</option>
+						<option value="Porsche 911 GT3 RS">
+							Porsche 911 GT3 RS
+						</option>
+						<option value="Porsche Cayenne">Porsche Cayenne</option>
+						<option value="Porsche Boxter 718">
+							Porsche Boxter 718
+						</option>
+						<option value="BMW M5 CS">BMW M5 CS</option>
+						<option value="BMW M3 CS">BMW M3 CS</option>
+						<option value="BMW X6">BMW X6</option>
+						<option value="BMW XM">BMW XM</option>
+						<option value="Mercedes S-Class">
+							Mercedes S-Class
+						</option>
+						<option value="Mercedes G-Class">
+							Mercedes G-Class
+						</option>
+						<option value="Mercedes AMG GT">Mercedes AMG GT</option>
+						<option value="Mercedes GLS">Mercedes GLS</option>
+					</select>
+					<label for="manufacturYear">Manufacturing Year:</label>
+					<input
+						type="text"
+						id="manufacturYear"
+						name="manufacturYear"
+					/><br /><br />
+					<label for="carDescription">Description:</label>
+					<textarea
+						id="carDescription"
+						name="carDescription"
+						rows="4"
+						cols="50"
+					></textarea
+					><br /><br />
+					<label for="carPrice">Car Price:</label>
+					<input
+						type="number"
+						id="carPrice"
+						name="carPrice"
+					/><br /><br />
+					<label for="carImages">Product Images:</label>
+					<input
+						type="file"
+						id="carImages"
+						name="carImages"
+						multiple
+						accept="image/*"
+					/><br />
+					<label for="carVideos">Product Videos:</label>
+					<input
+						type="file"
+						id="carVideos"
+						name="carVideos"
+						multiple
+						accept="video/*"
+					/><br />
+					<button type="submit">Submit Changes</button>
+				</form>
+			</div>
+
+			<div id="remove-car" class="admin-container">
+				<h2>Remove Car</h2>
+				<form id="removeCarForm" action="/removeCar" method="POST">
+					<label for="carBrandRemove">Car Brand:</label>
+					<select
+						id="carBrandRemove"
+						name="carBrand"
+						onchange="updateCarModels()"
+					>
+						<option value="">Select Car Brand</option>
+						<option value="BMW">BMW</option>
+						<option value="Porsche">Porsche</option>
+						<option value="Mercedes">Mercedes</option>
+						<option value="Range Rover">Range Rover</option>
+						<option value="McLaren">McLaren</option>
+					</select>
+					<button
+						type="button"
+						onclick="removeCurrentSelection('carBrandRemove')"
+					>
+						Remove Selected Brand</button
+					><br /><br />
+					<label for="carModelRemove">Car Model:</label>
+					<select id="carModelRemove" name="carModel">
+						<option value="">Select Car Model</option>
+						<option value="Porsche 928">Porsche 928</option>
+						<option value="Porsche 911 GT3 RS">
+							Porsche 911 GT3 RS
+						</option>
+						<option value="Porsche Cayenne">Porsche Cayenne</option>
+						<option value="Porsche Boxter 718">
+							Porsche Boxter 718
+						</option>
+						<option value="BMW M5 CS">BMW M5 CS</option>
+						<option value="BMW M3 CS">BMW M3 CS</option>
+						<option value="BMW X6">BMW X6</option>
+						<option value="BMW XM">BMW XM</option>
+						<option value="Mercedes S-Class">
+							Mercedes S-Class
+						</option>
+						<option value="Mercedes G-Class">
+							Mercedes G-Class
+						</option>
+						<option value="Mercedes AMG GT">Mercedes AMG GT</option>
+						<option value="Mercedes GLS">Mercedes GLS</option>
+					</select>
+					<button
+						type="button"
+						onclick="removeCurrentSelection('carModelRemove')"
+					>
+						Remove Selected Model</button
+					><br /><br />
+					<label for="manufacturYearRemove"
+						>Manufacturing Year:</label
+					>
+					<input
+						type="text"
+						id="manufacturYearRemove"
+						name="manufacturYear"
+					/><br /><br />
+					<label for="carDescriptionRemove">Description:</label>
+					<textarea
+						id="carDescriptionRemove"
+						name="carDescription"
+						rows="4"
+						cols="50"
+					></textarea
+					><br /><br />
+					<label for="carPriceRemove">Car Price:</label>
+					<input
+						type="number"
+						id="carPriceRemove"
+						name="carPrice"
+					/><br /><br />
+					<label for="carImagesRemove">Product Images:</label>
+					<input
+						type="file"
+						id="carImagesRemove"
+						name="carImages"
+						multiple
+						accept="image/*"
+					/><br />
+					<button type="button" onclick="removeProductImages()">
+						Remove Images</button
+					><br /><br />
+					<label for="carVideosRemove">Product Videos:</label>
+					<input
+						type="file"
+						id="carVideosRemove"
+						name="carVideos"
+						multiple
+						accept="video/*"
+					/><br />
+					<button type="button" onclick="removeProductVideos()">
+						Remove Videos</button
+					><br /><br />
+					<button type="submit">Submit Changes</button>
+				</form>
+			</div>
+		</div>
+
+		<script src="../public/js/admin.js"></script>
+	</body>
+</html>

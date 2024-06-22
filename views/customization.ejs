@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Customization</title>
+    <link rel="stylesheet" href="../public/css/custom.css">
+</head>
+<body style="background-color: rgb(134, 133, 133);">
+    <header>
+        <span class="year">2010-2024</span>
+        <a href="#" class="logo"><img src="../public/images/logo.jpg" alt="logo"></a>
+    </header>
+    <div class="banner">
+        <ul class="nav"></ul>
+        <div class="container">
+            <h1>Car Customization</h1>
+            
+            <!-- Car details -->
+            <div class="car-details">
+                <h2 id="car-name"></h2>
+                <img src="" alt="Car Image" id="car-image">
+            </div>
+            
+            <!-- Color selection -->
+            <div class="customization-option">
+                <h2>Choose Car Color:</h2>
+                <select id="car-color">
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                </select>
+            </div>
+
+            <!-- Year selection -->
+            <div class="customization-option">
+                <h2>Choose Car Year:</h2>
+                <select id="car-year">
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+            </div>
+
+            <!-- Body kit selection -->
+            <div class="customization-option">
+                <h2>Choose Body Kit:</h2>
+                <label><input type="radio" name="body-kit" value="none" checked> None</label>
+                <label><input type="radio" name="body-kit" value="kit1"> Kit 1</label>
+                <label><input type="radio" name="body-kit" value="kit2"> Kit 2</label>
+            </div>
+
+            <!-- Tuning company selection -->
+            <div class="customization-option">
+                <h2>Choose Tuning Company:</h2>
+                <label><input type="radio" name="tuning-company" value="none" checked> None</label>
+                <label><input type="radio" name="tuning-company" value="company1"> BRABUS 1</label>
+                <label><input type="radio" name="tuning-company" value="company2"> LEVI 2</label>
+            </div>
+
+            <div class="car-description">
+                <h2 id="car-name1"></h2>
+                <p id="car-price"></p>
+                <p id="car-description"></p>
+            </div>
+
+            <!-- Submit button -->
+            <button onclick="customizeCar()">Proceed to Payment</button>
+        </div>
+    </div>
+    <script src="../public/js/custom.js"></script>
+</body>
+</html>

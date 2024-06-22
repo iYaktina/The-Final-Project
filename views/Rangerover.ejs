@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- 7tet da 34an n2dr n3ml el gallery showcase ely t7t  -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<!-- 7tet da 34an n2dr n3ml el icons w kda -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+			integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="../public/css/main.css" />
+		<title>Wheels and Deals | Sport Cars Website</title>
+	</head>
+	<body>
+		<!--Header-->
+		<header>
+			<span class="year">2010-2024</span>
+			<a href="/" class="logo"
+				><img src="../public/images/logo.jpg" alt="logo"
+			/></a>
+			<a href="#" class="menu" onclick="toggleMenu();"></a>
+		</header>
+		<div class="banner">
+			<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
+
+			<!-- Script tag for client-side JavaScript -->
+			<script>
+				var isLoggedIn = <%= JSON.stringify(isLoggedIn) %>;
+			</script>
+			<div class="bg-video-list">
+				<video
+					class="bg-video Rangerover-1 active"
+					src="../public/assests/Rangerover/Range Rover Evoque (Cinematic Spec Ad) - TMS Edit Challenge 2020 (1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video Rangerover-2"
+					src="../public/assests/Rangerover/yt5s.io-New Range Rover Velar-(1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video Rangerover-3"
+					src="../public/assests/Rangerover/defender.mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video Rangerover-4"
+					src="../public/assests/Rangerover/svr.mp4"
+					autoplay
+					loop
+					muted
+				></video>
+			</div>
+			<div class="content">
+				<h1>Range Rover</h1>
+				<h3
+					class="model Rangerover-1 active"
+					data-image="../public/images/Evoque.jpeg"
+					data-video="../public/assests/Rangerover/Range Rover Evoque (Cinematic Spec Ad) - TMS Edit Challenge 2020 (1080p).mp4"
+				>
+					Range Rover Evoque
+				</h3>
+				<h3
+					class="model Rangerover-2"
+					data-image="../public/images/velar.jpeg"
+					data-video="../public/assests/Rangerover/yt5s.io-New Range Rover Velar-(1080p).mp4"
+				>
+					Range Rover Velar
+				</h3>
+				<h3
+					class="model Rangerover-3"
+					data-image="../public/images/defender.jpeg"
+					data-video="../public/assests/Rangerover/defender.mp4"
+				>
+					Range Rover Defender
+				</h3>
+				<h3
+					class="model Rangerover-4"
+					data-image="../public/images/SV.jpeg"
+					data-video="../public/assests/Rangerover/svr.mp4"
+				>
+					Range Rover SV
+				</h3>
+				<p></p>
+				<a href="#" onclick="openCustomizationPage()"
+					>View More Details</a
+				>
+			</div>
+			<a href="#" class="pause active" onclick="pauseVideo()">
+				<i class="bi bi-pause-circle"></i>
+			</a>
+			<a href="#" class="play" onclick="playVideo()">
+				<i class="bi bi-play-circle"></i>
+			</a>
+			<div class="screen">
+				<div class="shadow"></div>
+				<div>
+					<span style="--i: 0">
+						<video
+							class="trailer Rangerover-1 screen-video active"
+							src="../public/assests/Rangerover/Range Rover Evoque (Cinematic Spec Ad) - TMS Edit Challenge 2020 (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer Rangerover-2 screen-video"
+							src="../public/assests/Rangerover/yt5s.io-New Range Rover Velar-(1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer Rangerover-3 screen-video"
+							src="../public/assests/Rangerover/defender.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer Rangerover-4 screen-video"
+							src="../public/assests/Rangerover/svr.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 1">
+						<video
+							class="screen-video"
+							src="../public/assests/Rangerover/Range Rover-1.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 2">
+						<video
+							class="screen-video"
+							src="../public/assests/Rangerover/Rangerover-1.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 3">
+						<video
+							class="screen-video"
+							src="../public/assests/Rangerover/Range Rover _ First Look. (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+				</div>
+			</div>
+			<div class="gallery">
+				<div class="carousel">
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Rangerover-1');"
+					>
+						<img src="../public/images/Evoque.jpeg" alt="" />
+						<h4 style="color: white">Range Rover Evoque</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Rangerover-2');"
+					>
+						<img src="../public/images/velar.jpeg" alt="" />
+						<h4 style="color: #686a6c">Range Rover Velar</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Rangerover-3');"
+					>
+						<img src="../public/images/defender.jpeg" alt="" />
+						<h4 style="color: #818181">Range Rover Defender</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Rangerover-4');"
+					>
+						<img src="../public/images/SV.jpeg" alt="" />
+						<h4 style="color: #d1001f">Range Rover SV</h4>
+					</a>
+				</div>
+			</div>
+		</div>
+		<ul class="sci">
+			<li>
+				<a
+					href="https://www.facebook.com/share/gzMwYyx3QW7hTtES/?mibextid=LQQJ4d"
+					><i class="bi bi-facebook"></i
+				></a>
+			</li>
+			<li>
+				<a
+					href="https://www.instagram.com/hj_cars_2?igsh=NHB1YjJpdGNndHMz&utm_source=qr"
+					><i class="bi bi-instagram"></i
+				></a>
+			</li>
+			<li>
+				<a href="#"><i class="bi bi-youtube"></i></a>
+			</li>
+		</ul>
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script src="../public/js/script.js"></script>
+	</body>
+</html>

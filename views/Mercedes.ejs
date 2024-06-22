@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Linking Materialize CSS for the gallery showcase -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>
+		<!-- Linking Bootstrap Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+			integrity="sha384-4LISF5TTJX/fLmGSxO53rV4miRxdg84mZsxmO8Rx5jGtp/LbrixFETvWa5a6sESd"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="../public/css/main.css" />
+		<title>Wheels and Deals | Sport Cars Website</title>
+	</head>
+	<body>
+		<!-- Header -->
+		<header>
+			<span class="year">2010-2024</span>
+			<a href="/" class="logo"
+				><img src="../public/images/logo.jpg" alt="logo"
+			/></a>
+			<a href="#" class="menu" onclick="toggleMenu();"></a>
+		</header>
+		<div class="banner">
+			<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
+
+			<!-- Script tag for client-side JavaScript -->
+			<script>
+				var isLoggedIn = <%= JSON.stringify(isLoggedIn) %>;
+			</script>
+			<div class="bg-video-list">
+				<video
+					class="bg-video Mercedes-1 active"
+					src="../public/assests/Mercedes/Mercedes-Maybach GLS (2020)_ World Premiere _ Trailer (1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video Mercedes-2"
+					src="../public/assests/Mercedes/The Mercedes-AMG G 63_ Stronger Than Time (1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video Mercedes-3"
+					src="../public/assests/Mercedes/Beast of the Green Hell_ Mercedes-AMG GT R and Lewis Hamilton (1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+				<video
+					class="bg-video Mercedes-4"
+					src="../public/assests/Mercedes/Cares for What Matters_ The New S-Class. (1080p).mp4"
+					autoplay
+					loop
+					muted
+				></video>
+			</div>
+			<div class="content">
+				<h1>Mercedes</h1>
+				<h3
+					class="model Mercedes-1 active"
+					data-image="../public/images/GLS.jpeg"
+					data-video="../public/assests/Mercedes/Mercedes-Maybach GLS (2020)_ World Premiere _ Trailer (1080p).mp4"
+				>
+					Mercedes GLS
+				</h3>
+				<h3
+					class="model Mercedes-2"
+					data-image="../public/images/G-class.jpeg"
+					data-video="../public/assests/Mercedes/The Mercedes-AMG G 63_ Stronger Than Time (1080p).mp4"
+				>
+					Mercedes G-Class
+				</h3>
+				<h3
+					class="model Mercedes-3"
+					data-image="../public/images/amggt.jpeg"
+					data-video="../public/assests/Mercedes/Beast of the Green Hell_ Mercedes-AMG GT R and Lewis Hamilton (1080p).mp4"
+				>
+					Mercedes AMG-GT
+				</h3>
+				<h3
+					class="model Mercedes-4"
+					data-image="../public/images/s-class.jpeg"
+					data-video="../public/assests/Mercedes/Cares for What Matters_ The New S-Class. (1080p).mp4"
+				>
+					Mercedes S-Class
+				</h3>
+				<p></p>
+				<a href="#" onclick="openCustomizationPage()"
+					>View More Details</a
+				>
+			</div>
+			<a href="#" class="pause active" onclick="pauseVideo()">
+				<i class="bi bi-pause-circle"></i>
+			</a>
+			<a href="#" class="play" onclick="playVideo()">
+				<i class="bi bi-play-circle"></i>
+			</a>
+			<div class="screen">
+				<div class="shadow"></div>
+				<div>
+					<span style="--i: 0">
+						<video
+							class="trailer Mercedes-1 screen-video active"
+							src="../public/assests/Mercedes/Mercedes-Maybach GLS (2020)_ World Premiere _ Trailer (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer Mercedes-2 screen-video"
+							src="../public/assests/Mercedes/The Mercedes-AMG G 63_ Stronger Than Time (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer Mercedes-3 screen-video"
+							src="../public/assests/Mercedes/Beast of the Green Hell_ Mercedes-AMG GT R and Lewis Hamilton (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+						<video
+							class="trailer Mercedes-4 screen-video"
+							src="../public/assests/Mercedes/Cares for What Matters_ The New S-Class. (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 1">
+						<video
+							class="screen-video"
+							src="../public/assests/Mercedes/Mercedes - Benz (Logo Animation) (1080p).mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 2">
+						<video
+							class="screen-video"
+							src="../public/assests/Mercedes/Mercedes-1.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 3">
+						<video
+							class="screen-video"
+							src="../public/assests/Mercedes/trailer.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+				</div>
+			</div>
+			<div class="gallery">
+				<div class="carousel">
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Mercedes-1');"
+					>
+						<img src="../public/images/GLS.jpeg" alt="" class="" />
+						<h4 style="color: #686a6c">Mercedes GLS</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Mercedes-2');"
+					>
+						<img
+							src="../public/images/G-class.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: #686a6c">Mercedes G-CLASS</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Mercedes-3');"
+					>
+						<img
+							src="../public/images/amggt.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: #1f3b4d">Mercedes AMG-GT</h4>
+					</a>
+					<a
+						class="carousel-item"
+						href="#"
+						onclick="changeVideo('Mercedes-4');"
+					>
+						<img
+							src="../public/images/s-class.jpeg"
+							alt=""
+							class=""
+						/>
+						<h4 style="color: #808080">Mercedes S-Class</h4>
+					</a>
+				</div>
+			</div>
+		</div>
+		<ul class="sci">
+			<li>
+				<a href="#"><i class="bi bi-facebook"></i></a>
+			</li>
+			<li>
+				<a href="#"><i class="bi bi-instagram"></i></a>
+			</li>
+			<li>
+				<a href="#"><i class="bi bi-youtube"></i></a>
+			</li>
+		</ul>
+		<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script src="../public/js/script.js"></script>
+	</body>
+</html>
