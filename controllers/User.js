@@ -158,13 +158,13 @@ const resetPassword = async (req, res) => {
 		const transporter = nodemailer.createTransport({
 			service: "hotmail",
 			auth: {
-				user: "selfvibes@outlook.com",
-				pass: "account246810",
+				user: "WebMongodb@hotmail.com",
+				pass: "miu12341234",
 			},
 		});
 
 		const mailOptions = {
-			from: "selfvibes@outlook.com",
+			from: "WebMongodb@hotmail.com",
 			to: user.email,
 			subject: "Password changed",
 			text: `${user.username}, Your password has been changed. If you didn't request this change, please contact us immediately.`,
