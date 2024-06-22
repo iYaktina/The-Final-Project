@@ -2,14 +2,14 @@ document
 	.getElementById("personal-info-form")
 	.addEventListener("submit", function (event) {
 		event.preventDefault();
-
 		const updatedData = {
 			username: document.getElementById("name").value,
 			email: document.getElementById("username").value,
 			birthyear: document.getElementById("birthyear").value,
 			// Add other fields as needed
 		};
-
+		console.log(`Sending update request for user ID: ${userId}`);
+		console.log("Updated data:", updatedData);
 		fetch(`/user/${userId}`, {
 			method: "PUT",
 			headers: {
