@@ -46,3 +46,11 @@
                 <button type="submit">Edit User</button>
             </form>
         </div>
+        <div id="remove-user" class="admin-container">
+            <h2>Remove User</h2>
+            <form id="removeUserForm" action="/removeUser" method="POST">
+                <label for="removeUserId">User ID:</label>
+                <input type="text" id="removeUserId" name="removeUserId" required>
+                <button type="submit">Remove User</button>
+            </form>
+        </div>
