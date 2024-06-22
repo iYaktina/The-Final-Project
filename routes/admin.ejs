@@ -54,3 +54,15 @@
                 <button type="submit">Remove User</button>
             </form>
         </div>
+        <div id="add-car" class="admin-container">
+            <h2>Add Car</h2>
+            <form id="addCarForm" action="/addCar" method="POST" enctype="multipart/form-data">
+                <label for="carBrand">Car Brand:</label>
+                <select id="carBrand" name="carBrand" onchange="updateCarModels()">
+                    <option value="">Select Car Brand</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Porsche">Porsche</option>
+                    <option value="Mercedes">Mercedes</option>
+                    <option value="Range Rover">Range Rover</option>
+                    <option value="McLaren">McLaren</option>
+                </select>
