@@ -8,7 +8,7 @@ const dbURI =
 	"mongodb+srv://webmongodb:miu12341234@cluster0.y4q8mqj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-
+const bodyParser = require("body-parser");
 mongoose
 	.connect(dbURI)
 	.then((result) => app.listen(8080))
@@ -24,6 +24,8 @@ app.use(express.static(path.join(__dirname)));
 // Middleware to parse JSON and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // Add this line
+app.use(bodyParser.urlencoded({ extended: true })); // Add this line
 
 // Configure and use session middleware
 app.use(
@@ -311,6 +313,25 @@ app.get("/user/:userId", (req, res) => {
 		.catch((err) => {
 			console.error(err);
 			res.status(500).json({ error: "Server error" });
+		});
+});
+
+app.put("/user/:userId", (req, res) => {
+	const userId = req.params.userId;
+	const updatedData = req.body;
+	console.log(`Updating user with ID: ${userId}`);
+	console.log(`Data to update:`, updatedData);
+	user.findByIdAndUpdate(userId, updatedData, { new: true })
+		.then((updatedUser) => {
+			if (!updatedUser) {
+				return res.status(404).send("User not found");
+			}
+			console.log("User updated successfully:", updatedUser);
+			res.json(updatedUser);
+		})
+		.catch((err) => {
+			console.error("Error updating user:", err);
+			res.status(500).send("Internal server error");
 		});
 });
 
