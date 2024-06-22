@@ -5,7 +5,7 @@ const session = require("express-session");
 const user = require("./models/User");
 const app = express();
 const dbURI =
-	"mongodb+srv://abdelrahman:user2468@cluster0.6hiky7q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+	"mongodb+srv://webmongodb:miu12341234@cluster0.y4q8mqj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 
