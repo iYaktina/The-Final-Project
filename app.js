@@ -14,8 +14,6 @@ mongoose
 	.then((result) => app.listen(8080))
 	.catch((err) => console.log(err));
 
-let currentUserId = 0;
-
 // Set the view engine to ejs
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -104,13 +102,13 @@ app.post("/forget-password", async (req, res) => {
 		const transporter = nodemailer.createTransport({
 			service: "hotmail",
 			auth: {
-				user: "selfvibes@outlook.com",
-				pass: "account246810",
+				user: "email",
+				pass: "pass",
 			},
 		});
 
 		const mailOptions = {
-			from: "selfvibes@outlook.com",
+			from: "email",
 			to: user2.email,
 			subject: "Password Reset",
 			text: `You requested a password reset. Click the link to reset your password: http://localhost:3000/reset-password/${resetToken}`,
