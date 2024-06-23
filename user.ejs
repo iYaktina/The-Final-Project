@@ -47,3 +47,23 @@
                 <button type="submit" class="button">Save Changes</button>
             </form>
         </div>
+<!-- Order History Section -->
+        <div id="order-history" class="section hidden">
+            <h2>Order History</h2>
+            <ul id="orderList">
+                <% for(let i = 0; i < 5; i++) { %>
+                <li>
+                    <p>Product: </p>
+                    <p>Description: </p>
+                    <p>Price: </p>
+                    <textarea class="order-textbox" placeholder="Enter details about your order"></textarea>
+                    <button class="cancel-order" onclick="cancelOrder(<%= i %>)">Cancel</button>
+                </li>
+                <% } %>
+            </ul>
+            <p id="noOrderText" class="no-order-text hidden">No orders yet.</p>
+        </div>
+
+        <!-- Payment Method Section -->
+        <div id="payment-method" class="section hidden">
+            <h2>Payment Method</h2>
