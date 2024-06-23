@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Order = require("../models/Order");
 const path = require("path");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
@@ -319,6 +320,59 @@ const updateaddInfo = async (req, res) => {
 		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
 	}
 };
+
+const NewOrder = async (req, res) => {
+	try {
+		const userId = req.session.user._id; // Make sure you have user sessions set up
+		const {
+			Cardnumber,
+			carprice,
+			carname,
+			caryear,
+			carbrand,
+			carcolor,
+			cardesc,
+		} = req.body;
+
+		// 2. Fetch the User Document
+		const user = await User.findById(userId);
+		if (!user) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		const last4 = Cardnumber;
+		const price = carprice;
+		const car = carname;
+		const brand = carbrand;
+		const description = cardesc;
+		const year = caryear;
+		const color = carcolor;
+
+		// 5. Save the Changes
+		const newOrder = new Order({
+			last4Digits: last4,
+			price: price,
+			car: car,
+			brand: brand,
+			description: description,
+			year: year,
+			color: color,
+		});
+
+		await newOrder.save();
+		user.orders.push(newOrder._id);
+		await user.save();
+		// 6. Successful Response
+		res.status(200).json({
+			message: "Order has been placed successfully",
+			order: newOrder, // Return the new order
+		});
+	} catch (err) {
+		console.error("Error making Order information:", err);
+		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
+	}
+};
+
 module.exports = {
 	signup,
 	getUserById,
@@ -330,4 +384,5 @@ module.exports = {
 	addCreditCardInfo,
 	updatecardinfo,
 	updateaddInfo,
+	NewOrder,
 };
