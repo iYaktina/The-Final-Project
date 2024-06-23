@@ -95,7 +95,6 @@ function fetchOrderData(userId, page = 1, limit = 2) {
 				noOrderText.classList.remove("hidden");
 				orderList.classList.add("hidden");
 				currentPageElement.textContent = "";
-				totalPagesElement.textContent = "";
 			} else {
 				const startIndex = (page - 1) * limit;
 				const endIndex = startIndex + limit;
