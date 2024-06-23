@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const getUserById = (req, res) => {
 	const userId = req.params.userId;
 	User.findById(userId)
+		.populate("orders")
 		.then((user) => {
 			if (!user) {
 				return res.status(404).json({ error: "User not found" });
@@ -40,7 +41,6 @@ const updateUserById = (req, res) => {
 const signup = async (req, res) => {
 	const { username, email, password, confirm_password } = req.body;
 
-	// Basic validation
 	if (password !== confirm_password) {
 		return res.send("Passwords do not match");
 	}
@@ -59,9 +59,8 @@ const signup = async (req, res) => {
 
 			await newUser.save();
 
-			// Store user data in session
 			req.session.user = newUser;
-			res.redirect("/"); // Redirect to homepage after successful signup
+			res.redirect("/");
 		}
 	} catch (err) {
 		console.log(err);
@@ -79,11 +78,10 @@ const login = async (req, res) => {
 		});
 
 		if (loggedInUser) {
-			// Store user data in session
 			req.session.user = loggedInUser;
-			res.redirect("/"); // Redirect to homepage after successful login
+			res.redirect("/");
 		} else {
-			res.send("Invalid email or password"); // Handle invalid login
+			res.send("Invalid email or password");
 		}
 	} catch (err) {
 		console.log(err);
@@ -187,13 +185,13 @@ const resetPassword = async (req, res) => {
 };
 
 function hashingAlgorithm(pass) {
-	return pass; // Replace with your actual hashing algorithm
+	return pass;
 }
 
 const getSavedCardInfo = async (req, res) => {
 	try {
-		const userId = req.session.user._id; // assuming user ID is stored in session
-		const user = await User.findById(userId, "creditCard"); // assuming credit card info is stored in user model
+		const userId = req.session.user._id;
+		const user = await User.findById(userId, "creditCard");
 
 		if (user && user.creditCard) {
 			const last4 = user.creditCard.number.slice(-4);
@@ -209,7 +207,7 @@ const getSavedCardInfo = async (req, res) => {
 const addCreditCardInfo = async (req, res) => {
 	try {
 		const { cardNumber, CVV, expiryDate } = req.body;
-		const userId = req.session.user._id; // assuming user ID is stored in session
+		const userId = req.session.user._id;
 
 		const updatedUser = await User.findByIdAndUpdate(
 			userId,
@@ -236,11 +234,9 @@ const addCreditCardInfo = async (req, res) => {
 
 const updatecardinfo = async (req, res) => {
 	try {
-		const userId = req.session.user._id; // Make sure you have user sessions set up
+		const userId = req.session.user._id;
 		const { cardNumber, expiryDate, cvv } = req.body;
 
-		// 1. Input Validation (Enhance for Production)
-		// In a real application, use a library like 'validator' for more robust validation
 		if (
 			cardNumber.length < 13 ||
 			cardNumber.length > 19 ||
@@ -252,23 +248,19 @@ const updatecardinfo = async (req, res) => {
 			return res.status(400).json({ error: "Invalid CVV" });
 		}
 
-		// 2. Fetch the User Document
 		const user = await User.findById(userId);
 		if (!user) {
 			return res.status(404).json({ error: "User not found" });
 		}
 
-		// 4. Update User Document
 		if (!user.cardNumber) {
 			user.cardNumber = {};
 		}
 		user.cardNumber = maskCardNumber(cardNumber);
 		user.ExpiryDate = expiryDate;
 
-		// 5. Save the Changes
 		await user.save();
 
-		// 6. Successful Response
 		res.status(200).json({
 			message: "Card information updated successfully",
 			user: {
@@ -278,7 +270,7 @@ const updatecardinfo = async (req, res) => {
 		});
 	} catch (err) {
 		console.error("Error updating card information:", err);
-		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
+		res.status(500).json({ error: "Server error" });
 	}
 };
 
@@ -288,10 +280,9 @@ function maskCardNumber(cardNumber) {
 
 const updateaddInfo = async (req, res) => {
 	try {
-		const userId = req.session.user._id; // Make sure you have user sessions set up
+		const userId = req.session.user._id;
 		const { Streetadd, City, State, Zipcode } = req.body;
 
-		// 2. Fetch the User Document
 		const user = await User.findById(userId);
 		if (!user) {
 			return res.status(404).json({ error: "User not found" });
@@ -302,10 +293,8 @@ const updateaddInfo = async (req, res) => {
 		user.City = City;
 		user.ZipCode = Zipcode;
 
-		// 5. Save the Changes
 		await user.save();
 
-		// 6. Successful Response
 		res.status(200).json({
 			message: "Address information updated successfully",
 			user: {
@@ -317,13 +306,13 @@ const updateaddInfo = async (req, res) => {
 		});
 	} catch (err) {
 		console.error("Error updating Address information:", err);
-		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
+		res.status(500).json({ error: "Server error" });
 	}
 };
 
 const NewOrder = async (req, res) => {
 	try {
-		const userId = req.session.user._id; // Make sure you have user sessions set up
+		const userId = req.session.user._id;
 		const {
 			Cardnumber,
 			carprice,
@@ -334,7 +323,6 @@ const NewOrder = async (req, res) => {
 			cardesc,
 		} = req.body;
 
-		// 2. Fetch the User Document
 		const user = await User.findById(userId);
 		if (!user) {
 			return res.status(404).json({ error: "User not found" });
@@ -348,7 +336,6 @@ const NewOrder = async (req, res) => {
 		const year = caryear;
 		const color = carcolor;
 
-		// 5. Save the Changes
 		const newOrder = new Order({
 			last4Digits: last4,
 			price: price,
@@ -362,14 +349,77 @@ const NewOrder = async (req, res) => {
 		await newOrder.save();
 		user.orders.push(newOrder._id);
 		await user.save();
-		// 6. Successful Response
 		res.status(200).json({
 			message: "Order has been placed successfully",
-			order: newOrder, // Return the new order
+			order: newOrder, 
 		});
 	} catch (err) {
 		console.error("Error making Order information:", err);
-		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
+		res.status(500).json({ error: "Server error" }); 
+	}
+};
+
+const cancelOrder = async (req, res) => {
+	const { userId, orderId } = req.params;
+	try {
+		await Order.findByIdAndDelete(orderId);
+
+		await User.findByIdAndUpdate(userId, { $pull: { orders: orderId } });
+
+		res.status(200).json({ message: "Order cancelled successfully" });
+	} catch (error) {
+		console.error("Error cancelling order:", error);
+		res.status(500).json({ error: "Server error" });
+	}
+};
+
+const getUserByIdWithOrders = async (req, res) => {
+	const userId = req.params.userId;
+	const page = parseInt(req.query.page) || 1;
+	const limit = parseInt(req.query.limit) || 2; 
+
+	try {
+		const user = await User.findById(userId)
+			.populate({
+				path: "orders",
+				options: {
+					skip: (page - 1) * limit,
+					limit: limit,
+				},
+			})
+			.exec();
+
+		if (!user) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		const totalOrders = await Order.countDocuments({
+			_id: { $in: user.orders },
+		});
+		const totalPages = Math.ceil(totalOrders / limit);
+
+		res.json({
+			user: {
+				username: user.username,
+				email: user.email,
+				birthyear: user.birthyear,
+				Address: user.Address,
+				State: user.State,
+				City: user.City,
+				ZipCode: user.ZipCode,
+				cardNumber: user.cardNumber,
+				ExpiryDate: user.ExpiryDate,
+			},
+			orders: user.orders,
+			pagination: {
+				totalOrders: totalOrders,
+				totalPages: totalPages,
+				currentPage: page,
+			},
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Server error" });
 	}
 };
 
@@ -385,4 +435,6 @@ module.exports = {
 	updatecardinfo,
 	updateaddInfo,
 	NewOrder,
+	cancelOrder,
+	getUserByIdWithOrders,
 };
