@@ -22,7 +22,6 @@ function customizeCar() {
 	var carColor = document.getElementById("car-color").value;
 	var carYear = document.getElementById("car-year").value;
 
-	// Display car name and price on the payment page
 	document.getElementById("car-name").innerText = carName;
 	var paymentURL =
 		"/payment" +
@@ -37,20 +36,18 @@ function customizeCar() {
 		"&year=" +
 		encodeURIComponent(carYear);
 
-	// Redirect the user to the payment page
 	window.location.href = paymentURL;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
 	var carYearDropdown = document.getElementById("car-year");
 	carYearDropdown.value = "2018";
-	// Add event listener to car-year dropdown menu
-	displayCarDetails(carName, carYearDropdown.value); // Display car details based on the car name
+	displayCarDetails(carName, carYearDropdown.value); 
 
 	carYearDropdown.addEventListener("change", function () {
-		var selectedYear = parseInt(carYearDropdown.value); // Parse the selected year as an integer
+		var selectedYear = parseInt(carYearDropdown.value); 
 		console.log("years:: ", selectedYear);
-		displayCarDetails(carName, selectedYear); // Update car details based on the selected year
+		displayCarDetails(carName, selectedYear); 
 	});
 });
 
@@ -234,10 +231,10 @@ function calculatePrice(carName, currentYear) {
 			if (selectedBodyKit) {
 				switch (selectedBodyKit.value) {
 					case "kit1":
-						updatePrice(price + 10000); // Add $10,000 for Kit 1
+						updatePrice(price + 10000); 
 						break;
 					case "kit2":
-						updatePrice(price + 25000); // Add $25,000 for Kit 2
+						updatePrice(price + 25000); 
 						break;
 					default:
 						updatePrice(price);
@@ -247,7 +244,6 @@ function calculatePrice(carName, currentYear) {
 		});
 	});
 
-	// Add event listener to tuning company radio buttons
 	var tuningCompanyRadios = document.querySelectorAll(
 		'input[name="tuning-company"]'
 	);
@@ -259,10 +255,10 @@ function calculatePrice(carName, currentYear) {
 			if (selectedTuningCompany) {
 				switch (selectedTuningCompany.value) {
 					case "company1":
-						updatePrice(price + 70000); // Add $70,000 for BRABUS 1
+						updatePrice(price + 70000); 
 						break;
 					case "company2":
-						updatePrice(price + 100000); // Add $100,000 for LEVI 2
+						updatePrice(price + 100000); 
 						break;
 					default:
 						updatePrice(price);
@@ -277,7 +273,6 @@ function calculatePrice(carName, currentYear) {
 }
 
 function updatePrice(price) {
-	// Update the displayed price
 	var carPriceElement = document.getElementById("car-price");
 	carPriceElement.textContent = `$${price.toFixed(2)}`;
 }
