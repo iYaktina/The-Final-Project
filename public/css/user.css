@@ -141,22 +141,6 @@ body {
 	align-items: flex-start;
 }
 
-.delete-order,
-.cancel-order {
-	color: red;
-	cursor: pointer;
-	margin-left: 10px;
-	border: none;
-	background: none;
-	font-size: 14px;
-	align-self: flex-end;
-}
-
-.no-order-text {
-	color: #777;
-	font-style: italic;
-	margin-top: 10px;
-}
 
 .hidden {
 	display: none;
