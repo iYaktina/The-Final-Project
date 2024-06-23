@@ -67,3 +67,31 @@
         <!-- Payment Method Section -->
         <div id="payment-method" class="section hidden">
             <h2>Payment Method</h2>
+<form>
+                <div class="form-group">
+                    <label for="existing-payment-method">Current Payment Method</label>
+                    <input type="text" id="existing-payment-method" name="existing-payment-method" placeholder="Visa ending in 1234" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="payment-method-selection">Payment Method</label>
+                    <input type="radio" id="visa" name="payment-method" value="visa">
+                    <label for="visa">Visa</label><br>
+                    <input type="radio" id="mastercard" name="payment-method" value="mastercard">
+                    <label for="mastercard">MasterCard</label>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="Enter your card number">
+                </div>
+                <div class="form-group">
+                    <label for="expiration-date">Expiration Date</label>
+                    <input type="text" id="expiration-date" name="expiration-date" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="Enter your CVV">
+                </div>
+                <button type="submit" class="button">Save Changes</button>
+            </form>
+        </div>
+
