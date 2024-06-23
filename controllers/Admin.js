@@ -3,25 +3,31 @@ const Order = require("../models/Order");
 const path = require("path");
 const fs = require("fs");
 
-const getAdminDashboard = (req, res) => {
-	const loggedInUser = req.session.user;
-	res.render("Adminpart", {
-		loggedInUser: loggedInUser,
-		title: "Admin Menu",
-	});
-};
+const AddUser = async (req, res) => {
+	const { username, email, password, passwordConfirm } = req.body;
 
-const GetAllUsers = (req, res) => {
-	Users.find()
-		.then((result) => {
-			res.render("viewAll", {
-				users: result,
-				user: req.session.user === undefined ? "" : req.session.user,
+	if (password !== passwordConfirm) {
+		return res.send("Passwords do not match");
+	}
+
+	try {
+		const existingUser = await Users.findOne({ email: email });
+		if (existingUser) {
+			return res.send("Email is already registered");
+		} else {
+			const newUser = new Users({
+				username: username,
+				email: email,
+				password: password,
+				role: "user",
 			});
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+
+			await newUser.save();
+		}
+	} catch (err) {
+		console.log(err);
+		res.status(500).send("Server error");
+	}
 };
 
 const GetUser = (req, res) => {
@@ -77,10 +83,9 @@ const toClient = (req, res) => {
 };
 
 module.exports = {
-	GetAllUsers,
 	GetUser,
 	DeleteUser,
 	toAdmin,
 	toClient,
-	getAdminDashboard,
+	AddUser,
 };
