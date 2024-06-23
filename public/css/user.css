@@ -84,7 +84,13 @@ body {
 	display: none;
 }
 
+.header input[type="file"] {
+	display: none;
+}
 
+.header .image-box:hover {
+	border-color: #007bff;
+}
 
 .header .image-box span {
 	color: #ccc;
