@@ -12,26 +12,22 @@ mongoose
 	.then((result) => app.listen(8080))
 	.catch((err) => console.log(err));
 
-// Set the view engine to ejs
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname)));
 
-// Middleware to parse JSON and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // Add this line
-app.use(bodyParser.urlencoded({ extended: true })); // Add this line
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Configure and use session middleware
 app.use(
 	session({
-		secret: "12341234123412341234123412341234", // replace with your secret key
+		secret: "12341234123412341234123412341234",
 		resave: false,
 		saveUninitialized: true,
-		cookie: { secure: false }, // set to true if using https
+		cookie: { secure: false },
 	})
 );
 
@@ -47,13 +43,12 @@ const indexRoutes = require("./routes/index");
 // const adminRoutes = require("./routes/admin");
 const userRoutes = require("./routes/user");
 
-// Use routes
 app.use("/", indexRoutes);
 // app.use("/", adminRoutes);
 app.use("/", userRoutes);
 
 app.use((req, res) => {
-		const loggedInUser = req.session.user;
+	const loggedInUser = req.session.user;
 	res.status(404).render("404", {
 		loggedInUser: loggedInUser,
 	});
