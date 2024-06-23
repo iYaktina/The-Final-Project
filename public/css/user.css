@@ -124,22 +124,6 @@ body {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 }
-.ull {
-	list-style-type: none;
-	padding: 0;
-	text-align: left;
-}
-
-.ull li {
-	background: #e0e0e0;
-	margin: 5px 0;
-	padding: 10px;
-	border-radius: 5px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-start;
-}
 
 .delete-order,
 .cancel-order {
