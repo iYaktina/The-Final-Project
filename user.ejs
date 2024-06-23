@@ -19,3 +19,31 @@
             <button class="button" onclick="toggleSection('payment-method')">Payment Method</button>
             <button class="button" onclick="toggleSection('address')">Address</button>
         </div>
+  <!-- User Profile Section (for Add Photo) -->
+        <div id="add-photo" class="header hidden">
+            <div class="image-box" onclick="document.getElementById('profile-picture').click()">
+                <img id="profileImage" src="#" alt="User Picture">
+                <span>+ Add Photo</span>
+            </div>
+            <input type="file" id="profile-picture" name="profile-picture" accept="image/*" onchange="previewImage(event)">
+        </div>
+
+        <!-- Personal Information Section -->
+        <div id="personal-info" class="section hidden">
+            <h2>Personal Information</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" oninput="updateEmailDisplay(this.value)">
+                </div>
+                <div class="form-group">
+                    <label for="birthyear">Birth Year</label>
+                    <input type="text" id="birthyear" name="birthyear" placeholder="Enter your birth year">
+                </div>
+                <button type="submit" class="button">Save Changes</button>
+            </form>
+        </div>
