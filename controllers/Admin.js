@@ -7,13 +7,15 @@ const AddUser = async (req, res) => {
 	const { username, email, password, passwordConfirm } = req.body;
 
 	if (password !== passwordConfirm) {
-		return res.send("Passwords do not match");
+		return res.status(400).json({ message: "Passwords do not match" });
 	}
 
 	try {
 		const existingUser = await Users.findOne({ email: email });
 		if (existingUser) {
-			return res.send("Email is already registered");
+			return res
+				.status(400)
+				.json({ message: "Email is already registered" });
 		} else {
 			const newUser = new Users({
 				username: username,
@@ -23,12 +25,16 @@ const AddUser = async (req, res) => {
 			});
 
 			await newUser.save();
+			return res
+				.status(201)
+				.json({ message: "User created successfully" });
 		}
 	} catch (err) {
 		console.log(err);
-		res.status(500).send("Server error");
+		res.status(500).json({ message: "Server error" });
 	}
 };
+
 
 const GetUser = (req, res) => {
 	var query = { _id: req.params.id };
