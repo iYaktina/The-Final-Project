@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Account Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title">User Account Information</div>
+
+        <!-- Buttons to reveal sections -->
+        <div class="button-container">
+            <button class="button" onclick="toggleSection('personal-info')">Personal Info</button>
+            <button class="button" onclick="toggleSection('add-photo')">Add Photo</button>
+            <button class="button" onclick="toggleSection('order-history')">Order History</button>
+ <button class="button" onclick="toggleSection('order-status')">Order Status</button>
+            <button class="button" onclick="toggleSection('payment-method')">Payment Method</button>
+            <button class="button" onclick="toggleSection('address')">Address</button>
+        </div>
+
+        <!-- User Profile Section (for Add Photo) -->
+        <div id="add-photo" class="header hidden">
+            <div class="image-box" onclick="document.getElementById('profile-picture').click()">
+                <img id="profileImage" src="#" alt="User Picture">
+                <span>+ Add Photo</span>
+            </div>
+            <input type="file" id="profile-picture" name="profile-picture" accept="image/*" onchange="previewImage(event)">
+        </div>
+        <!-- Personal Information Section -->
+        <div id="personal-info" class="section hidden">
+            <h2>Personal Information</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" oninput="updateEmailDisplay(this.value)">
+                </div>
+ <div class="form-group">
+                    <label for="birthyear">Birth Year</label>
+                    <input type="text" id="birthyear" name="birthyear" placeholder="Enter your birth year">
+                </div>
+                <button type="submit" class="button">Save Changes</button>
+            </form>
+        </div>
+        <!-- Order History Section -->
+        <div id="order-history" class="section hidden">
+            <h2>Order History</h2>
+            <ul id="orderList">
+                <% for(let i = 0; i < 5; i++) { %>
+                <li>
+                    <p>Product: </p>
+                    <p>Description: </p>
+                    <p>Price: </p>
+                    <textarea class="order-textbox" placeholder="Enter details about your order"></textarea>
+                    <button class="cancel-order" onclick="cancelOrder(<%= i %>)">Cancel</button>
+                </li>
+                <% } %>
+            </ul>
+            <p id="noOrderText" class="no-order-text hidden">No orders yet.</p>
+        </div>
+ <!-- Payment Method Section -->
+        <div id="payment-method" class="section hidden">
+            <h2>Payment Method</h2>
+            <form>
+                <div class="form-group">
+                    <label for="existing-payment-method">Current Payment Method</label>
+                    <input type="text" id="existing-payment-method" name="existing-payment-method" placeholder="Visa ending in 1234" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="payment-method-selection">Payment Method</label>
+                    <input type="radio" id="visa" name="payment-method" value="visa">
+                    <label for="visa">Visa</label><br>
+                    <input type="radio" id="mastercard" name="payment-method" value="mastercard">
+                    <label for="mastercard">MasterCard</label>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="Enter your card number">
+                </div>
+                <div class="form-group">
+                    <label for="expiration-date">Expiration Date</label>
+                    <input type="text" id="expiration-date" name="expiration-date" placeholder="MM/YY">
+                </div>
+<div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="Enter your CVV">
+                </div>
+                <button type="submit" class="button">Save Changes</button>
+            </form>
+        </div>
+ <!-- Address Section -->
+        <div id="address" class="section hidden">
+            <h2>Address</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name-on-card">Name</label>
+                    <input type="text" id="name-on-card" name="name-on-card" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="street-address">Street Address</label>
+                    <input type="text" id="street-address" name="street-address" placeholder="Enter your street address">
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="Enter your city">
+                </div>
+                <div class="form-group">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" placeholder="Enter your state">
+                </div>
+                <div class="form-group">
+                    <label for="zipcode">Zip Code</label>
+                    <input type="text" id="zipcode" name="zipcode" placeholder="Enter your zip code">
+                </div>
+  <button type="submit" class="button">Save Changes</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
