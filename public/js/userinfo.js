@@ -6,7 +6,6 @@ document
 			username: document.getElementById("name").value,
 			email: document.getElementById("username").value,
 			birthyear: document.getElementById("birthyear").value,
-			// Add other fields as needed
 		};
 		console.log(`Sending update request for user ID: ${userId}`);
 		console.log("Updated data:", updatedData);
@@ -39,17 +38,14 @@ function fetchUserData() {
 			}
 		})
 		.then((data) => {
-			// Populate general user information
 			document.getElementById("name").value = data.username;
 			document.getElementById("username").value = data.email;
 			document.getElementById("birthyear").value = data.birthyear;
-			// ... other fields ...
 			document.getElementById("street-address").value = data.Address;
 			document.getElementById("state").value = data.State;
 			document.getElementById("city").value = data.City;
 			document.getElementById("zipcode").value = data.ZipCode;
 
-			// Populate payment method information
 			const existingPaymentMethodInput = document.getElementById(
 				"existing-payment-method"
 			);
@@ -57,9 +53,7 @@ function fetchUserData() {
 				document.getElementById("expiration-date");
 
 			if (data.cardNumber) {
-				// Check if cardDetails and cardNumber exist
 				existingPaymentMethodInput.value = data.cardNumber;
-				// Update with masked card number
 				expirationDateInput.value = data.expiryDate;
 			} else {
 				existingPaymentMethodInput.value = "No payment method on file";
@@ -76,13 +70,113 @@ function fetchUserData() {
 		});
 }
 
-fetchUserData(); // Call fetchUserData function on page load
+fetchUserData();
 
-// Enable edit mode for input fields
+let currentPage = 1;
+const ordersPerPage = 2;
+
+function fetchOrderData(userId, page = 1, limit = 2) {
+	fetch(`/user/${userId}?page=${page}&limit=${limit}`)
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			} else {
+				return response.json();
+			}
+		})
+		.then((data) => {
+			const orderList = document.getElementById("orderList");
+			const noOrderText = document.getElementById("noOrderText");
+			const currentPageElement = document.getElementById("currentPage");
+
+			orderList.innerHTML = "";
+
+			if (data.orders.length === 0) {
+				noOrderText.classList.remove("hidden");
+				orderList.classList.add("hidden");
+				currentPageElement.textContent = "";
+				totalPagesElement.textContent = "";
+			} else {
+				const startIndex = (page - 1) * limit;
+				const endIndex = startIndex + limit;
+				const displayedOrders = data.orders.slice(startIndex, endIndex);
+
+				displayedOrders.forEach((order) => {
+					const listItem = document.createElement("li");
+					listItem.innerHTML = `
+                        <p>Car: ${order.car}</p>
+                        <p>Price: ${order.price}</p>
+                        <p>Color: ${order.color}</p>
+                        <p>Year: ${order.year}</p>
+                        <p>Description: ${order.description}</p>
+                        <button class="cancel-order" onclick="cancelOrder('${userId}', '${order._id}')">Cancel</button>
+                    `;
+					orderList.appendChild(listItem);
+				});
+
+				noOrderText.classList.add("hidden");
+				orderList.classList.remove("hidden");
+				currentPageElement.textContent = page;
+			}
+		})
+		.catch((error) => {
+			console.error("Error fetching order data:", error);
+			alert(
+				"An error occurred while fetching your order information. Please try again later."
+			);
+		});
+}
+
+function goToPreviousPage() {
+	if (currentPage > 1) {
+		currentPage--;
+		fetchOrderData(userId, currentPage, ordersPerPage);
+	}
+}
+
+function goToNextPage() {
+	currentPage++;
+	fetchOrderData(userId, currentPage, ordersPerPage);
+}
+
+fetchOrderData(userId, currentPage, ordersPerPage);
+
+function cancelOrder(userId, orderId, index) {
+	fetch(`/cancel-order/${userId}/${orderId}`, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((response) => {
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			return response.json();
+		})
+		.then((data) => {
+			alert(data.message);
+			const orderList = document.getElementById("orderList");
+			orderList.removeChild(orderList.children[index]);
+			if (orderList.children.length === 0) {
+				document
+					.getElementById("noOrderText")
+					.classList.remove("hidden");
+				orderList.classList.add("hidden");
+			}
+		})
+		.catch((error) => {
+			console.error("Error cancelling order:", error);
+			alert(
+				"An error occurred while cancelling the order. Please try again later."
+			);
+		});
+}
+
 function enableEdit(fieldName) {
 	const field = document.getElementById(fieldName);
-	field.disabled = !field.disabled; // Toggle disabled attribute
-	field.focus(); // Focus on the field
+	field.disabled = !field.disabled;
+	field.focus();
 }
 
 function toggleMenu() {
@@ -112,15 +206,6 @@ function previewImage(event) {
 		output.nextElementSibling.style.display = "none";
 	};
 	reader.readAsDataURL(event.target.files[0]);
-}
-
-function cancelOrder(orderIndex) {
-	const orderList = document.getElementById("orderList");
-	const orderItems = orderList.getElementsByTagName("li");
-	orderItems[orderIndex].remove();
-	if (orderList.children.length === 0) {
-		document.getElementById("noOrderText").classList.remove("hidden");
-	}
 }
 
 function updateEmailDisplay(email) {
@@ -164,7 +249,6 @@ document
 					document.getElementById("existing-payment-method").value =
 						"**** **** **** " + cardNumber.slice(-4);
 					alert(data.message);
-					// Consider clearing input fields after successful update
 					document.getElementById("card-number").value = "";
 					document.getElementById("cvv").value = "";
 					document.getElementById("expiration-date").value = "";
@@ -174,7 +258,7 @@ document
 				console.error("Error saving card info:", error);
 				alert(
 					"An error occurred while updating your card information."
-				); // General error message for the user
+				);
 			});
 	});
 
@@ -200,7 +284,7 @@ document
 		})
 			.then((response) => {
 				if (!response.ok) {
-					throw new Error(`HTTP error! status: ${response.status}`); 
+					throw new Error(`HTTP error! status: ${response.status}`);
 				} else {
 					return response.json();
 				}
@@ -216,6 +300,6 @@ document
 				console.error("Error saving Address info:", error);
 				alert(
 					"An error occurred while updating your Address information."
-				); // General error message for the user
+				);
 			});
 	});
