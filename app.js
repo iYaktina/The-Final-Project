@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 const app = express();
+
 const dbURI =
 	"mongodb+srv://webmongodb:miu12341234@cluster0.y4q8mqj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const bodyParser = require("body-parser");
@@ -34,12 +35,6 @@ app.use(
 	})
 );
 
-app.get("/customization", (req, res) => {
-	res.render("customization", {
-		title: "Customization",
-	});
-});
-
 app.get("/Adminpart", (req, res) => {
 	const loggedInUser = req.session.user;
 	res.render("Adminpart", {
@@ -58,8 +53,9 @@ app.use("/", indexRoutes);
 app.use("/", userRoutes);
 
 app.use((req, res) => {
+		const loggedInUser = req.session.user;
 	res.status(404).render("404", {
-		user: req.session.user === undefined ? "" : req.session.user,
+		loggedInUser: loggedInUser,
 	});
 });
 const PORT = process.env.PORT || 3000;

@@ -188,6 +188,137 @@ const resetPassword = async (req, res) => {
 function hashingAlgorithm(pass) {
 	return pass; // Replace with your actual hashing algorithm
 }
+
+const getSavedCardInfo = async (req, res) => {
+	try {
+		const userId = req.session.user._id; // assuming user ID is stored in session
+		const user = await User.findById(userId, "creditCard"); // assuming credit card info is stored in user model
+
+		if (user && user.creditCard) {
+			const last4 = user.creditCard.number.slice(-4);
+			res.json({ hasSavedCard: true, cardLast4: last4 });
+		} else {
+			res.json({ hasSavedCard: false });
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Server error" });
+	}
+};
+const addCreditCardInfo = async (req, res) => {
+	try {
+		const { cardNumber, CVV, expiryDate } = req.body;
+		const userId = req.session.user._id; // assuming user ID is stored in session
+
+		const updatedUser = await User.findByIdAndUpdate(
+			userId,
+			{
+				cardNumber,
+				CVV,
+				expiryDate,
+			},
+			{ new: true }
+		);
+
+		if (updatedUser) {
+			res.status(200).json({
+				message: "Credit card information saved successfully",
+			});
+		} else {
+			res.status(404).json({ error: "User not found" });
+		}
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: "Server error" });
+	}
+};
+
+const updatecardinfo = async (req, res) => {
+	try {
+		const userId = req.session.user._id; // Make sure you have user sessions set up
+		const { cardNumber, expiryDate, cvv } = req.body;
+
+		// 1. Input Validation (Enhance for Production)
+		// In a real application, use a library like 'validator' for more robust validation
+		if (
+			cardNumber.length < 13 ||
+			cardNumber.length > 19 ||
+			!/^\d+$/.test(cardNumber)
+		) {
+			return res.status(400).json({ error: "Invalid card number" });
+		}
+		if (cvv.length < 3 || cvv.length > 4 || !/^\d+$/.test(cvv)) {
+			return res.status(400).json({ error: "Invalid CVV" });
+		}
+
+		// 2. Fetch the User Document
+		const user = await User.findById(userId);
+		if (!user) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		// 4. Update User Document
+		if (!user.cardNumber) {
+			user.cardNumber = {};
+		}
+		user.cardNumber = maskCardNumber(cardNumber);
+		user.ExpiryDate = expiryDate;
+
+		// 5. Save the Changes
+		await user.save();
+
+		// 6. Successful Response
+		res.status(200).json({
+			message: "Card information updated successfully",
+			user: {
+				cardNumber: user.cardNumber,
+				expiryDate: user.ExpiryDate,
+			},
+		});
+	} catch (err) {
+		console.error("Error updating card information:", err);
+		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
+	}
+};
+
+function maskCardNumber(cardNumber) {
+	return "**** **** **** " + cardNumber.slice(-4);
+}
+
+const updateaddInfo = async (req, res) => {
+	try {
+		const userId = req.session.user._id; // Make sure you have user sessions set up
+		const { Streetadd, City, State, Zipcode } = req.body;
+
+		// 2. Fetch the User Document
+		const user = await User.findById(userId);
+		if (!user) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		user.Address = Streetadd;
+		user.State = State;
+		user.City = City;
+		user.ZipCode = Zipcode;
+
+		// 5. Save the Changes
+		await user.save();
+
+		// 6. Successful Response
+		res.status(200).json({
+			message: "Address information updated successfully",
+			user: {
+				Streetadd: user.Address,
+				State: user.State,
+				City: user.City,
+				Zipcode: user.ZipCode,
+			},
+		});
+	} catch (err) {
+		console.error("Error updating Address information:", err);
+		res.status(500).json({ error: "Server error" }); // Avoid exposing specific errors to clients
+	}
+};
 module.exports = {
 	signup,
 	getUserById,
@@ -195,4 +326,8 @@ module.exports = {
 	login,
 	forgotPassword,
 	resetPassword,
+	getSavedCardInfo,
+	addCreditCardInfo,
+	updatecardinfo,
+	updateaddInfo,
 };

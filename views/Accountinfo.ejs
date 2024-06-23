@@ -17,7 +17,6 @@
 		</header>
 		<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
 		<script>
-			// Pass loggedInUser._id to JavaScript
 			const userId = "<%= loggedInUser._id %>";
 		</script>
 		<div class="container">
@@ -28,14 +27,8 @@
 				<button class="button" onclick="toggleSection('personal-info')">
 					Personal Info
 				</button>
-				<button class="button" onclick="toggleSection('add-photo')">
-					Add Photo
-				</button>
 				<button class="button" onclick="toggleSection('order-history')">
 					Order History
-				</button>
-				<button class="button" onclick="toggleSection('order-status')">
-					Order Status
 				</button>
 				<button
 					class="button"
@@ -46,24 +39,6 @@
 				<button class="button" onclick="toggleSection('address')">
 					Address
 				</button>
-			</div>
-
-			<!-- User Profile Section (for Add Photo) -->
-			<div id="add-photo" class="header hidden">
-				<div
-					class="image-box"
-					onclick="document.getElementById('profile-picture').click()"
-				>
-					<img id="profileImage" src="#" alt="User Picture" />
-					<span>+ Add Photo</span>
-				</div>
-				<input
-					type="file"
-					id="profile-picture"
-					name="profile-picture"
-					accept="image/*"
-					onchange="previewImage(event)"
-				/>
 			</div>
 
 			<!-- Personal Information Section -->
@@ -80,7 +55,7 @@
 							disabled
 						/>
 						<span class="edit-icon" onclick="enableEdit('name')"
-							>✏️</span
+							>Edit ✏️</span
 						>
 					</div>
 					<div class="form-group">
@@ -93,7 +68,7 @@
 							disabled
 						/>
 						<span class="edit-icon" onclick="enableEdit('username')"
-							>✏️</span
+							>Edit ✏️</span
 						>
 					</div>
 					<div class="form-group">
@@ -108,7 +83,7 @@
 						<span
 							class="edit-icon"
 							onclick="enableEdit('birthyear')"
-							>✏️</span
+							>Edit ✏️</span
 						>
 					</div>
 					<button type="submit" class="button">Save Changes</button>
@@ -142,42 +117,6 @@
 							Cancel
 						</button>
 					</li>
-					<li>
-						<p>Product:</p>
-						<p>Description:</p>
-						<p>Price:</p>
-						<textarea
-							class="order-textbox"
-							placeholder="Enter details about your order"
-						></textarea>
-						<button class="cancel-order" onclick="cancelOrder(2)">
-							Cancel
-						</button>
-					</li>
-					<li>
-						<p>Product:</p>
-						<p>Description:</p>
-						<p>Price:</p>
-						<textarea
-							class="order-textbox"
-							placeholder="Enter details about your order"
-						></textarea>
-						<button class="cancel-order" onclick="cancelOrder(3)">
-							Cancel
-						</button>
-					</li>
-					<li>
-						<p>Product:</p>
-						<p>Description:</p>
-						<p>Price:</p>
-						<textarea
-							class="order-textbox"
-							placeholder="Enter details about your order"
-						></textarea>
-						<button class="cancel-order" onclick="cancelOrder(4)">
-							Cancel
-						</button>
-					</li>
 				</ul>
 				<p id="noOrderText" class="no-order-text hidden">
 					No orders yet.
@@ -187,7 +126,7 @@
 			<!-- Payment Method Section -->
 			<div id="payment-method" class="section hidden">
 				<h2>Payment Method</h2>
-				<form>
+				<form id="paymentForm">
 					<div class="form-group">
 						<label for="existing-payment-method"
 							>Current Payment Method</label
@@ -196,56 +135,46 @@
 							type="text"
 							id="existing-payment-method"
 							name="existing-payment-method"
-							placeholder="Visa ending in 1234"
+							placeholder="**** **** **** 1234"
 							disabled
 						/>
 					</div>
-					<div class="form-group">
-						<label for="payment-method-selection"
-							>Payment Method</label
-						>
-						<input
-							type="radio"
-							id="visa"
-							name="payment-method"
-							value="visa"
-						/>
-						<label for="visa">Visa</label><br />
-						<input
-							type="radio"
-							id="mastercard"
-							name="payment-method"
-							value="mastercard"
-						/>
-						<label for="mastercard">MasterCard</label>
-					</div>
+
 					<div class="form-group">
 						<label for="card-number">Card Number</label>
 						<input
 							type="text"
 							id="card-number"
-							name="card-number"
+							name="cardNumber"
+							inputmode="numeric"
+							pattern="[0-9\s]{13,19}"
+							autocomplete="cc-number"
 							placeholder="Enter your card number"
 						/>
 					</div>
+
 					<div class="form-group">
 						<label for="expiration-date">Expiration Date</label>
 						<input
-							type="text"
+							type="month"
 							id="expiration-date"
-							name="expiration-date"
-							placeholder="MM/YY"
+							name="expirationDate"
 						/>
 					</div>
+
 					<div class="form-group">
 						<label for="cvv">CVV</label>
 						<input
 							type="text"
 							id="cvv"
 							name="cvv"
+							inputmode="numeric"
+							pattern="[0-9]{3,4}"
+							autocomplete="cc-csc"
 							placeholder="Enter your CVV"
 						/>
 					</div>
+
 					<button type="submit" class="button">Save Changes</button>
 				</form>
 			</div>
@@ -253,16 +182,7 @@
 			<!-- Address Section -->
 			<div id="address" class="section hidden">
 				<h2>Address</h2>
-				<form>
-					<div class="form-group">
-						<label for="name-on-card">Name</label>
-						<input
-							type="text"
-							id="name-on-card"
-							name="name-on-card"
-							placeholder="Enter your name"
-						/>
-					</div>
+				<form id="addressform">
 					<div class="form-group">
 						<label for="street-address">Street Address</label>
 						<input
@@ -270,7 +190,13 @@
 							id="street-address"
 							name="street-address"
 							placeholder="Enter your street address"
+							disabled
 						/>
+						<span
+							class="edit-icon"
+							onclick="enableEdit('street-address')"
+							>Edit ✏️</span
+						>
 					</div>
 					<div class="form-group">
 						<label for="city">City</label>
@@ -279,7 +205,11 @@
 							id="city"
 							name="city"
 							placeholder="Enter your city"
+							disabled
 						/>
+						<span class="edit-icon" onclick="enableEdit('city')"
+							>Edit ✏️</span
+						>
 					</div>
 					<div class="form-group">
 						<label for="state">State</label>
@@ -288,7 +218,11 @@
 							id="state"
 							name="state"
 							placeholder="Enter your state"
+							disabled
 						/>
+						<span class="edit-icon" onclick="enableEdit('state')"
+							>Edit ✏️</span
+						>
 					</div>
 					<div class="form-group">
 						<label for="zipcode">Zip Code</label>
@@ -297,7 +231,11 @@
 							id="zipcode"
 							name="zipcode"
 							placeholder="Enter your zip code"
+							disabled
 						/>
+						<span class="edit-icon" onclick="enableEdit('zipcode')"
+							>Edit ✏️</span
+						>
 					</div>
 					<button type="submit" class="button">Save Changes</button>
 				</form>

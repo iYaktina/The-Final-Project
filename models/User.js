@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
 	{
+		role: {
+			type: String,
+			enum: ["user", "admin"],
+			default: "user",
+		},
 		username: {
 			type: String,
 			required: true,
@@ -18,18 +23,18 @@ const UserSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		role: {
-			type: String,
-			enum: ["user", "admin"],
-			default: "user",
-		},
-		Image: {
+		Address: {
 			type: String,
 			required: false,
 		},
-		Type: {
+		State: {
 			type: String,
-			required: false,
+		},
+		City: {
+			type: String,
+		},
+		ZipCode: {
+			type: Number,
 		},
 		Verification: {
 			type: Boolean,
@@ -42,6 +47,15 @@ const UserSchema = new mongoose.Schema(
 		resetTokenexp: {
 			type: Date,
 			default: undefined,
+		},
+		cardNumber: {
+			type: String,
+		},
+		CVV: {
+			type: Number,
+		},
+		ExpiryDate: {
+			type: String,
 		},
 		orders: [
 			{

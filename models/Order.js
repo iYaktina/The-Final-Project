@@ -5,7 +5,7 @@ const OrderSchema = new mongoose.Schema(
 		last4Digits: {
 			type: String,
 			required: true,
-			length: 4, // Assuming you want exactly 4 digits
+			length: 4, 
 		},
 		date: {
 			type: Date,

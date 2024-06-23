@@ -14,6 +14,21 @@ router.get("/login", (req, res) => {
 	});
 });
 
+router.get("/payment", (req, res) => {
+	const loggedInUser = req.session.user;
+	res.render("payment", {
+		loggedInUser: loggedInUser,
+		title: "Payment",
+	});
+});
+
+router.get("/customization", (req, res) => {
+	const loggedInUser = req.session.user;
+	res.render("customization", {
+		loggedInUser: loggedInUser,
+		title: "Customization",
+	});
+});
 router.get("/Accountinfo", (req, res) => {
 	const loggedInUser = req.session.user;
 	res.render("Accountinfo", {
@@ -42,10 +57,10 @@ router.get("/customization", (req, res) => {
 });
 router.get("/user/:userId", userController.getUserById);
 router.put("/user/:userId", userController.updateUserById);
-
+router.post("/update-card-info", userController.updatecardinfo);
+router.post("/update-add-info", userController.updateaddInfo);
 router.post("/signup", userController.signup);
 router.post("/login", userController.login);
-
 router.get("/logout", (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
