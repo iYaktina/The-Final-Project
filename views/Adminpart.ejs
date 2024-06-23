@@ -7,6 +7,11 @@
 		<link rel="stylesheet" href="../public/css/Admin.css" />
 	</head>
 	<body>
+		<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
+		<script>
+			const userId = "<%= loggedInUser._id %>";
+		</script>
+
 		<div class="container">
 			<h1>Admin Panel</h1>
 			<div class="menu">
@@ -20,9 +25,9 @@
 				<button onclick="showSection('remove-car')">Remove Car</button>
 			</div>
 
-                           <div id="add-user" class="admin-container">
+			<div id="add-user" class="admin-container">
 				<h2>Add User</h2>
-				<form id="addUserForm" action="/addUser" method="POST">
+				<form id="addUserForm" action="/AddUser" method="POST">
 					<label for="username">Username:</label>
 					<input type="text" id="username" name="username" required />
 					<label for="email">Email:</label>
@@ -44,7 +49,6 @@
 					<button type="submit">Submit</button>
 				</form>
 			</div>
-			
 
 			<div id="edit-user" class="admin-container">
 				<h2>Edit User</h2>
