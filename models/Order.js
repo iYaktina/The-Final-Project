@@ -5,7 +5,7 @@ const OrderSchema = new mongoose.Schema(
 		last4Digits: {
 			type: String,
 			required: true,
-			length: 4, 
+			length: 4,
 		},
 		date: {
 			type: Date,
@@ -13,7 +13,7 @@ const OrderSchema = new mongoose.Schema(
 			default: Date.now,
 		},
 		price: {
-			type: Number,
+			type: String,
 			required: true,
 		},
 		car: {
@@ -32,13 +32,9 @@ const OrderSchema = new mongoose.Schema(
 			type: Number,
 			required: true,
 		},
-		address: {
+
+		color: {
 			type: String,
-			required: true,
-		},
-		user: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
 			required: true,
 		},
 	},
