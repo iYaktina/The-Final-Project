@@ -1,8 +1,7 @@
 <ul class="nav" onclick="toggleMenu();">
 	<% if (loggedInUser) { %> <% if (loggedInUser.role === "admin") { %>
 	<li><a href="/logout">Logout</a></li>
-	<li><a href="/account">Account Information</a></li>
-	<li><a href="/viewall">View All</a></li>
+	<li><a href="/Adminpart">Admin Menu</a></li>
 	<% } else { %>
 	<li><a href="/logout">Logout</a></li>
 	<li><a href="/Accountinfo">Account Information</a></li>
