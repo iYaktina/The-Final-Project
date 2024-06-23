@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	$("#reset-password-form").submit(function (e) {
-		e.preventDefault(); // Prevent the form from submitting via the browser
+		e.preventDefault(); 
 
 		const newPassword = $('input[name="password"]').val();
 		const confirmPassword = $('input[name="confirmpassword"]').val();
