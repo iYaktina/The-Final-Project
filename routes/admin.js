@@ -12,4 +12,5 @@ router.get("/Adminpart", (req, res) => {
 	});
 });
 
+router.post("/AddUser", Admin.AddUser);
 module.exports = router;
