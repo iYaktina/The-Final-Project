@@ -49,12 +49,13 @@ router.get("/reset-password/:token", (req, res) => {
 
 router.post("/forget-password", userController.forgotPassword);
 router.post("/reset-password/:token", userController.resetPassword);
-
 router.get("/user/:userId", userController.getUserById);
 router.put("/user/:userId", userController.updateUserById);
 router.post("/update-card-info", userController.updatecardinfo);
 router.post("/update-add-info", userController.updateaddInfo);
 router.post("/new-Order", userController.NewOrder);
+router.get("/user/:userId/orders", userController.getUserByIdWithOrders);
+router.delete("/cancel-order/:userId/:orderId", userController.cancelOrder);
 router.post("/signup", userController.signup);
 router.post("/login", userController.login);
 router.get("/logout", (req, res) => {
