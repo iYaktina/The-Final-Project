@@ -28,4 +28,16 @@
             </div>
             <input type="file" id="profile-picture" name="profile-picture" accept="image/*" onchange="previewImage(event)">
         </div>
+        <!-- Personal Information Section -->
+        <div id="personal-info" class="section hidden">
+            <h2>Personal Information</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" oninput="updateEmailDisplay(this.value)">
+                </div>
 
