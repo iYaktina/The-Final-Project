@@ -162,3 +162,15 @@ body {
 	display: none;
 }
 
+.order-textbox {
+	width: 100%;
+	padding: 8px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.edit-icon {
+	cursor: pointer;
+	margin-left: 10px;
+}
