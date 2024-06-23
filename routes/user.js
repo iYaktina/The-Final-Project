@@ -50,15 +50,11 @@ router.get("/reset-password/:token", (req, res) => {
 router.post("/forget-password", userController.forgotPassword);
 router.post("/reset-password/:token", userController.resetPassword);
 
-router.get("/customization", (req, res) => {
-	res.render("customization", {
-		title: "Customization",
-	});
-});
 router.get("/user/:userId", userController.getUserById);
 router.put("/user/:userId", userController.updateUserById);
 router.post("/update-card-info", userController.updatecardinfo);
 router.post("/update-add-info", userController.updateaddInfo);
+router.post("/new-Order", userController.NewOrder);
 router.post("/signup", userController.signup);
 router.post("/login", userController.login);
 router.get("/logout", (req, res) => {
