@@ -88,14 +88,7 @@ body {
 	display: none;
 }
 
-.header .image-box:hover {
-	border-color: #007bff;
-}
 
-.header .image-box span {
-	color: #ccc;
-	font-size: 12px;
-}
 
 .header div {
 	margin-top: 20px;
