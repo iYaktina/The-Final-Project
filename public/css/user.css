@@ -92,6 +92,18 @@ body {
 	border-color: #007bff;
 }
 
+.header .image-box span {
+	color: #ccc;
+	font-size: 12px;
+}
+
+.header div {
+	margin-top: 20px;
+}
+
+.section h2 {
+	margin-top: 0;
+}
 
 .form-group {
 	margin-bottom: 15px;
