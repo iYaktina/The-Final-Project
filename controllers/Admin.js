@@ -35,7 +35,29 @@ const AddUser = async (req, res) => {
 	}
 };
 
+const editUser = async (req, res) => {
+	const { editUserId, editUsername, editEmail, editPassword } = req.body;
 
+	try {
+		const user = await Users.findById(editUserId);
+
+		if (!user) {
+			return res.status(404).json({ message: "User not found" });
+		}
+
+		user.username = editUsername || user.username;
+		user.email = editEmail || user.email;
+		if (editPassword) {
+			user.password = editPassword;
+		}
+
+		await user.save();
+		res.status(200).json({ message: "User updated successfully" });
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ message: "Server error" });
+	}
+};
 const GetUser = (req, res) => {
 	var query = { _id: req.params.id };
 	Users.findOne(query)
@@ -94,4 +116,5 @@ module.exports = {
 	toAdmin,
 	toClient,
 	AddUser,
+	editUser,
 };
