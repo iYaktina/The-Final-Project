@@ -47,7 +47,9 @@ body {
 	font-size: 14px;
 }
 
-
+.button:hover {
+    background-color: #0056b3;
+}
 
 .header,
 .section {
