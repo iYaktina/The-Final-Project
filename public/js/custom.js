@@ -18,6 +18,9 @@ function customizeCar() {
 	var urlParams = new URLSearchParams(window.location.search);
 	var carName = urlParams.get("name");
 	var carPrice = document.getElementById("car-price").innerText;
+	var carDescription = document.getElementById("car-description").innerText;
+	var carColor = document.getElementById("car-color").value;
+	var carYear = document.getElementById("car-year").value;
 
 	// Display car name and price on the payment page
 	document.getElementById("car-name").innerText = carName;
@@ -26,7 +29,13 @@ function customizeCar() {
 		"?name=" +
 		encodeURIComponent(carName) +
 		"&price=" +
-		encodeURIComponent(carPrice);
+		encodeURIComponent(carPrice) +
+		"&description=" +
+		encodeURIComponent(carDescription) +
+		"&color=" +
+		encodeURIComponent(carColor) +
+		"&year=" +
+		encodeURIComponent(carYear);
 
 	// Redirect the user to the payment page
 	window.location.href = paymentURL;
