@@ -1,6 +1,4 @@
 $(document).ready(function () {
-	
-
 	// Function to extract parameters from URL
 	function getUrlParameter(name) {
 		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -14,11 +12,15 @@ $(document).ready(function () {
 	// Extract car name and price from URL
 	var carName = getUrlParameter("name");
 	var carPrice = getUrlParameter("price");
-
+	var carDesc = getUrlParameter("description");
+	var carYear = getUrlParameter("year");
+	var carColor = getUrlParameter("color");
 	// Display car name and price on the payment page
 	$("#carName").text(carName);
 	$("#carPrice").text(carPrice);
-
+	$("#carYear").text(carYear);
+	$("#carColor").text(carColor);
+	$("#carDescription").text(carDesc);
 	$("#payButton").click(function () {
 		// Validate card holder
 		var cardHolder = $(".card_holder").val().trim();
@@ -56,7 +58,67 @@ $(document).ready(function () {
 			return;
 		}
 
-		
 		alert("Payment successful!");
 	});
 });
+
+function getSubstringUntilFirstWhitespace(inputString) {
+	// Check if inputString is defined and is a string
+	if (typeof inputString !== "string") {
+		return "";
+	}
+
+	// Find the index of the first whitespace
+	const firstWhitespaceIndex = inputString.indexOf(" ");
+
+	// If no whitespace is found, return the whole string
+	if (firstWhitespaceIndex === -1) {
+		return inputString;
+	}
+
+	// Return the substring from the start to the first whitespace
+	return inputString.substring(0, firstWhitespaceIndex);
+}
+
+document
+	.getElementById("newPaymentForm")
+	.addEventListener("submit", function (event) {
+		event.preventDefault();
+		const formData = {
+			Cardnumber: document.getElementById("cardnum").value.slice(-4),
+			carprice: document.getElementById("carPrice").innerText,
+			carname: document.getElementById("carName").innerText,
+			caryear: document.getElementById("carYear").innerText,
+			carbrand: getSubstringUntilFirstWhitespace(
+				document.getElementById("carName").innerText
+			),
+			carcolor: document.getElementById("carColor").innerText,
+			cardesc: document.getElementById("carDescription").innerText,
+		};
+
+		fetch("/new-Order", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(formData),
+		})
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! status: ${response.status}`);
+				} else {
+					return response.json();
+				}
+			})
+			.then((data) => {
+				if (data.error) {
+					alert("Error: " + data.error);
+				} else {
+					alert(data.message);
+				}
+			})
+			.catch((error) => {
+				console.error("Error making Order:", error);
+				alert(
+					"An error occurred while placing your Order information."
+				); // General error message for the user
+			});
+	});
