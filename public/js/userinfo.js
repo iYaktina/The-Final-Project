@@ -29,19 +29,6 @@ document
 			});
 	});
 
-// Function to fetch user data and populate form
-// // function fetchUserData() {
-// // 	fetch(`/user/${userId}`)
-// // 		.then((response) => response.json())
-// // 		.then((data) => {
-// // 			// Populate form fields with fetched data
-// // 			document.getElementById("name").value = data.username;
-// // 			document.getElementById("username").value = data.email;
-// // 			document.getElementById("birthyear").value = data.birthyear;
-// // 			// Add other fields as needed
-// // 		})
-// // 		.catch((error) => console.error("Error fetching user data:", error));
-// }
 function fetchUserData() {
 	fetch(`/user/${userId}`)
 		.then((response) => {
