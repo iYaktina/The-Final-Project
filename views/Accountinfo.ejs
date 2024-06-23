@@ -92,31 +92,8 @@
 			<!-- Order History Section -->
 			<div id="order-history" class="section hidden">
 				<h2>Order History</h2>
-				<ul class="ull" id="orderList">
-					<li>
-						<p>Product:</p>
-						<p>Description:</p>
-						<p>Price:</p>
-						<textarea
-							class="order-textbox"
-							placeholder="Enter details about your order"
-						></textarea>
-						<button class="cancel-order" onclick="cancelOrder(0)">
-							Cancel
-						</button>
-					</li>
-					<li>
-						<p>Product:</p>
-						<p>Description:</p>
-						<p>Price:</p>
-						<textarea
-							class="order-textbox"
-							placeholder="Enter details about your order"
-						></textarea>
-						<button class="cancel-order" onclick="cancelOrder(1)">
-							Cancel
-						</button>
-					</li>
+				<ul id="orderList" class="ull">
+					<!-- Orders will be dynamically added here -->
 				</ul>
 				<p id="noOrderText" class="no-order-text hidden">
 					No orders yet.
@@ -126,6 +103,7 @@
 			<!-- Payment Method Section -->
 			<div id="payment-method" class="section hidden">
 				<h2>Payment Method</h2>
+				<br />
 				<form id="paymentForm">
 					<div class="form-group">
 						<label for="existing-payment-method"
