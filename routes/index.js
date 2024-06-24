@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Car = require("../models/Car");
 
 router.get("/", (req, res) => {
 	const loggedInUser = req.session.user;
@@ -42,13 +43,20 @@ router.get("/rangerover", (req, res) => {
 	});
 });
 
-router.get("/mclaren", (req, res) => {
+router.get("/mclaren", async (req, res) => {
 	const loggedInUser = req.session.user;
-	res.render("Mclaren", {
-		loggedInUser: loggedInUser,
-		isLoggedIn: loggedInUser ? true : false,
-		title: "McLaren",
-	});
+	try {
+		const cars = await Car.find({ carBrand: "McLaren" });
+		res.render("mclaren", {
+			cars,
+			loggedInUser: loggedInUser,
+			isLoggedIn: loggedInUser ? true : false,
+			title: "McLaren",
+		});
+	} catch (err) {
+		console.error(err);
+		res.status(500).send("Server error");
+	}
 });
 
 module.exports = router;

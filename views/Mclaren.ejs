@@ -3,12 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- 7tet da 34an n2dr n3ml el gallery showcase ely t7t -->
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
 		/>
-		<!-- 7tet da 34an n2dr n3ml el icons w kda -->
 		<link
 			rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
@@ -16,10 +14,9 @@
 			crossorigin="anonymous"
 		/>
 		<link rel="stylesheet" href="../public/css/main.css" />
-		<title>Wheels and Deals | Sport Cars Website</title>
+		<title>Wheels and Deals | McLaren Cars</title>
 	</head>
 	<body>
-		<!--Header-->
 		<header>
 			<span class="year">2010-2024</span>
 			<a href="/" class="logo"
@@ -29,231 +26,75 @@
 		</header>
 		<div class="banner">
 			<%- include('partials/nav', { loggedInUser: loggedInUser }) %>
-
-			<!-- Script tag for client-side JavaScript -->
 			<script>
 				var isLoggedIn = <%= JSON.stringify(isLoggedIn) %>;
 			</script>
 			<div class="bg-video-list">
+				<% cars.forEach(car => { %>
 				<video
-					class="bg-video mclaren-1 active"
-					src="../public/assests/Mclaren/mclaren-1.mp4"
+					class="bg-video <%= car.carBrand.toLowerCase() %>-<%= car.carModel.toLowerCase().replace(/ /g, '-') %>"
+					src="../public/assests/<%= car.carVideos[0] %>"
 					autoplay
 					loop
 					muted
 				></video>
-				<video
-					class="bg-video mclaren-2"
-					src="../public/assests/Mclaren/mclaren-2.mp4"
-					autoplay
-					loop
-					muted
-				></video>
-				<video
-					class="bg-video mclaren-3"
-					src="../public/assests/Mclaren/mclaren-3.mp4"
-					autoplay
-					loop
-					muted
-				></video>
-				<video
-					class="bg-video mclaren-4"
-					src="../public/assests/Mclaren/mclaren-4.mp4"
-					autoplay
-					loop
-					muted
-				></video>
-				<video
-					class="bg-video mclaren-5"
-					src="../public/assests/Mclaren/mclaren-5.mp4"
-					autoplay
-					loop
-					muted
-				></video>
+				<% }); %>
 			</div>
 			<div class="content">
 				<h1>McLaren</h1>
+				<% cars.forEach(car => { %>
 				<h3
-					class="model mclaren-1 active"
-					data-image="../public/images/mclaren-1.jpg"
-					data-video="../public/assests/Mclaren/mclaren-1.mp4"
+					class="model <%= car.carBrand.toLowerCase() %>-<%= car.carModel.toLowerCase().replace(/ /g, '-') %>"
+					data-image="../public/images/<%= car.carImages[0] %>"
+					data-video="../public/assests/<%= car.carVideos[0] %>"
+					data-description="<%= car.carDescription %>"
+					data-price="<%= car.carPrice %>"
 				>
-					765LT Spider
+					<%= car.carModel %>
 				</h3>
-				<h3
-					class="model mclaren-2"
-					style="color: #92ff00"
-					data-image="../public/images/mclaren-2.jpg"
-					data-video="../public/assests/Mclaren/mclaren-2.mp4"
-				>
-					Artura
-				</h3>
-				<h3
-					class="model mclaren-3"
-					style="color: #ff0015"
-					data-image="../public/images/mclaren-3.jpeg"
-					data-video="../public/assests/Mclaren/mclaren-3.mp4"
-				>
-					750s
-				</h3>
-				<h3
-					class="model mclaren-4"
-					style="color: #ff2e00"
-					data-image="../public/images/mclaren-4.jpeg"
-					data-video="../public/assests/Mclaren/mclaren-4.mp4"
-				>
-					765LT
-				</h3>
-				<h3
-					class="model mclaren-5"
-					style="color: #bbc0dd"
-					data-image="../public/images/mclaren-5.jpeg"
-					data-video="../public/assests/Mclaren/mclaren-5.mp4"
-				>
-					750S Spider
-				</h3>
+				<% }); %>
 				<p></p>
-				<a href="#" onclick="openCustomizationPage()"
+				<a href="#" onclick="openCustomizationPagedyn()"
 					>View More Details</a
 				>
 			</div>
-			<a href="#" class="pause active" onclick="pauseVideo()">
-				<i class="bi bi-pause-circle"></i>
-			</a>
-			<a href="#" class="play" onclick="playVideo()">
-				<i class="bi bi-play-circle"></i>
-			</a>
+			<a href="#" class="pause active" onclick="pauseVideo()"
+				><i class="bi bi-pause-circle"></i
+			></a>
+			<a href="#" class="play" onclick="playVideo()"
+				><i class="bi bi-play-circle"></i
+			></a>
 			<div class="screen">
 				<div class="shadow"></div>
 				<div>
-					<span style="--i: 0">
+					<% cars.forEach((car, index) => { %>
+					<span style="--i: <%= index %>">
 						<video
-							class="trailer mclaren-1 screen-video active"
-							src="../public/assests/Mclaren/mclaren-1.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-						<video
-							class="trailer mclaren-2 screen-video"
-							src="../public/assests/Mclaren/mclaren-2.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-						<video
-							class="trailer mclaren-3 screen-video"
-							src="../public/assests/Mclaren/mclaren-3.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-						<video
-							class="trailer mclaren-4 screen-video"
-							src="../public/assests/Mclaren/mclaren-4.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-						<video
-							class="trailer mclaren-5 screen-video"
-							src="../public/assests/Mclaren/mclaren-5.mp4"
+							class="trailer <%= car.carBrand.toLowerCase() %>-<%= car.carModel.toLowerCase().replace(/ /g, '-') %> screen-video"
+							src="../public/assests/<%= car.carVideos[0] %>"
 							autoplay
 							loop
 							muted
 						></video>
 					</span>
-					<span style="--i: 1">
-						<video
-							class="screen-video"
-							src="../public/assests/Mclaren/trailer-1.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-					</span>
-					<span style="--i: 2">
-						<video
-							class="screen-video"
-							src="../public/assests/Mclaren/trailer-2.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-					</span>
-					<span style="--i: 3">
-						<video
-							class="screen-video"
-							src="../public/assests/Mclaren/trailer-3.mp4"
-							autoplay
-							loop
-							muted
-						></video>
-					</span>
+					<% }); %>
 				</div>
 			</div>
 			<div class="gallery">
 				<div class="carousel">
+					<% cars.forEach(car => { %>
 					<a
 						class="carousel-item"
 						href="#"
-						onclick="changeVideo('mclaren-1');"
+						onclick="changeVideo('<%= car.carBrand.toLowerCase() %>-<%= car.carModel.toLowerCase().replace(/ /g, '-') %>');"
 					>
 						<img
-							src="../public/images/mclaren-1.jpg"
+							src="../public/images/<%= car.carImages[0] %>"
 							alt=""
-							class=""
 						/>
-						<h4>765LT Spider</h4>
+						<h4><%= car.carModel %></h4>
 					</a>
-					<a
-						class="carousel-item"
-						href="#"
-						onclick="changeVideo('mclaren-2');"
-					>
-						<img
-							src="../public/images/mclaren-2.jpg"
-							alt=""
-							class=""
-						/>
-						<h4 style="color: #92ff00">Artura</h4>
-					</a>
-					<a
-						class="carousel-item"
-						href="#"
-						onclick="changeVideo('mclaren-3');"
-					>
-						<img
-							src="../public/images/mclaren-3.jpeg"
-							alt=""
-							class=""
-						/>
-						<h4 style="color: #ff0015">750S</h4>
-					</a>
-					<a
-						class="carousel-item"
-						href="#"
-						onclick="changeVideo('mclaren-4');"
-					>
-						<img
-							src="../public/images/mclaren-4.jpeg"
-							alt=""
-							class=""
-						/>
-						<h4 style="color: #ff2e00">765LT</h4>
-					</a>
-					<a
-						class="carousel-item"
-						href="#"
-						onclick="changeVideo('mclaren-5');"
-					>
-						<img
-							src="../public/images/mclaren-5.jpeg"
-							alt=""
-							class=""
-						/>
-						<h4 style="color: #bbc0dd">750S Spider</h4>
-					</a>
+					<% }); %>
 				</div>
 			</div>
 		</div>

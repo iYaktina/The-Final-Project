@@ -12,7 +12,10 @@ function toggleMenu() {
 	menu.classList.toggle("active");
 	nav.classList.toggle("active");
 }
-
+function updateCarModels() {
+	// Logic to dynamically update car models based on selected brand
+	// For simplicity, let's keep it as an empty function now
+}
 document
 	.getElementById("addUserForm")
 	.addEventListener("submit", async function (event) {

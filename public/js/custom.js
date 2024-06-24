@@ -9,6 +9,8 @@ function getUrlParameter(name) {
 
 var carName = getUrlParameter("name");
 var carImage = getUrlParameter("image");
+var carDescription = getUrlParameter("description");
+var carPrice = getUrlParameter("price");
 console.log("Displaying car details for:", carName);
 
 document.getElementById("car-name").innerText = carName;
@@ -42,12 +44,12 @@ function customizeCar() {
 document.addEventListener("DOMContentLoaded", function () {
 	var carYearDropdown = document.getElementById("car-year");
 	carYearDropdown.value = "2018";
-	displayCarDetails(carName, carYearDropdown.value); 
+	displayCarDetails(carName, carYearDropdown.value);
 
 	carYearDropdown.addEventListener("change", function () {
-		var selectedYear = parseInt(carYearDropdown.value); 
+		var selectedYear = parseInt(carYearDropdown.value);
 		console.log("years:: ", selectedYear);
-		displayCarDetails(carName, selectedYear); 
+		displayCarDetails(carName, selectedYear);
 	});
 });
 
@@ -231,10 +233,10 @@ function calculatePrice(carName, currentYear) {
 			if (selectedBodyKit) {
 				switch (selectedBodyKit.value) {
 					case "kit1":
-						updatePrice(price + 10000); 
+						updatePrice(price + 10000);
 						break;
 					case "kit2":
-						updatePrice(price + 25000); 
+						updatePrice(price + 25000);
 						break;
 					default:
 						updatePrice(price);
@@ -255,10 +257,10 @@ function calculatePrice(carName, currentYear) {
 			if (selectedTuningCompany) {
 				switch (selectedTuningCompany.value) {
 					case "company1":
-						updatePrice(price + 70000); 
+						updatePrice(price + 70000);
 						break;
 					case "company2":
-						updatePrice(price + 100000); 
+						updatePrice(price + 100000);
 						break;
 					default:
 						updatePrice(price);

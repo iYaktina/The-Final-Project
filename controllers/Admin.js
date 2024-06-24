@@ -1,5 +1,7 @@
 const Users = require("../models/User");
 const Order = require("../models/Order");
+const Car = require("../models/Car");
+const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
@@ -71,9 +73,46 @@ const removeUser = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
+const addCar = async (req, res) => {
+	try {
+		const { carBrand, carModel, manufacturYear, carDescription, carPrice } =
+			req.body;
+		const carImages = req.files["carImages"].map((file) => file.filename);
+		const carVideos = req.files["carVideos"].map((file) => file.filename);
 
+		const newCar = new Car({
+			carBrand,
+			carModel,
+			manufacturYear,
+			carDescription,
+			carPrice,
+			carImages,
+			carVideos,
+		});
+
+		await newCar.save();
+		res.redirect("/Adminpart"); // Redirect to the admin page or show success message
+	} catch (err) {
+		console.error(err);
+		res.status(500).send("Server error");
+	}
+};
+const storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		const type = file.mimetype.split("/")[0];
+		const dest = type === "image" ? "public/images" : "public/assests";
+		cb(null, dest);
+	},
+	filename: function (req, file, cb) {
+		cb(null, Date.now() + path.extname(file.originalname));
+	},
+});
+
+const upload = multer({ storage: storage });
 module.exports = {
 	AddUser,
 	editUser,
 	removeUser,
+	addCar,
+	upload,
 };

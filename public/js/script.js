@@ -129,6 +129,65 @@ function openCustomizationPage() {
 	}
 }
 
+function openCustomizationPagedyn() {
+	const activeModel = document.querySelector(".model.active");
+
+	if (!isLoggedIn) {
+		alert("You must be logged in to view more details.");
+		window.location.href = "/login";
+		return;
+	}
+
+	if (activeModel) {
+		// Get car details
+		var carName = activeModel.innerText;
+		var carImage = activeModel.getAttribute("data-image");
+		var carDescription = activeModel.getAttribute("data-description");
+		var carPrice = activeModel.getAttribute("data-price");
+
+		// Encode URL parameters
+		var encodedCarName = encodeURIComponent(carName);
+		var encodedCarImage = encodeURIComponent(carImage);
+		var encodedCarDescription = encodeURIComponent(carDescription);
+		var encodedCarPrice = encodeURIComponent(carPrice);
+
+		// Construct URL with parameters
+		var customizationURL =
+			"/customization" +
+			"?name=" +
+			encodedCarName +
+			"&image=" +
+			encodedCarImage +
+			"&description=" +
+			encodedCarDescription +
+			"&price=" +
+			encodedCarPrice;
+
+		// Open pop-up window with customization page
+		var popupWidth = 800; // Adjust width as needed
+		var popupHeight = 600; // Adjust height as needed
+		var left = (window.innerWidth - popupWidth) / 2;
+		var top = (window.innerHeight - popupHeight) / 2;
+		var popupWindow = window.open(
+			customizationURL,
+			"Customization",
+			"width=" +
+				popupWidth +
+				", height=" +
+				popupHeight +
+				", top=" +
+				top +
+				", left=" +
+				left
+		);
+
+		// Focus the window if it's already open
+		if (window.focus) {
+			popupWindow.focus();
+		}
+	}
+}
+
 $(document).ready(function () {
 	$(".carousel").carousel();
 });

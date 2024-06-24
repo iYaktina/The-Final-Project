@@ -22,6 +22,11 @@ router.get("/users", async (req, res) => {
 		res.status(500).send("Server error");
 	}
 });
+router.post(
+	"/addCar",
+	Admin.upload.fields([{ name: "carImages" }, { name: "carVideos" }]),
+	Admin.addCar
+);
 router.post("/removeUser", Admin.removeUser);
 router.post("/editUser", Admin.editUser);
 router.post("/AddUser", Admin.AddUser);
