@@ -9,6 +9,10 @@
 	--primary: #00c2de;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	background: #000000;
 	font-family: "Racing Sans One", sans-serif;
@@ -487,6 +491,27 @@ w el kalam kman ynzl m3ah 34an homa same class fa el line lw mznl4 el kalam m4 h
 
 .banner .pause.active {
 	display: block;
+}
+
+/* About Us Section */
+.about-us {
+	padding: 50px 20px;
+	background-color: #ffffff;
+	color: #333;
+	text-align: center;
+}
+
+.about-us h2 {
+	font-size: 2.5em;
+	margin-bottom: 20px;
+	color: #00c2de;
+}
+
+.about-us p {
+	font-size: 1.2em;
+	line-height: 1.6;
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 /*Responsive UI*/
