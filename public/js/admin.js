@@ -56,6 +56,17 @@ async function fetchUsers() {
 		const response = await fetch("/users");
 		const users = await response.json();
 		const userList = document.getElementById("userList");
+		const userList1 = document.getElementById("removeUserList");
+
+		users.forEach((user) => {
+			const userItem = document.createElement("div");
+			userItem.className = "user-item";
+			userItem.innerHTML = `
+                    <span>${user.username} (${user.email})</span>
+                    <button onclick="selectUserToRemove('${user._id}', '${user.username}', '${user.email}')">Select</button>
+                `;
+			userList1.appendChild(userItem);
+		});
 
 		users.forEach((user) => {
 			const userItem = document.createElement("div");
@@ -114,6 +125,47 @@ document
 			alert("An error occurred while updating the user");
 		}
 	});
+function selectUserToRemove(id, username, email) {
+	document.getElementById("removeUserId").value = id;
+}
 
+document
+	.getElementById("removeUserForm")
+	.addEventListener("submit", async function (event) {
+		event.preventDefault();
+
+		const form = event.target;
+		const formData = new FormData(form);
+
+		const data = {
+			removeUserId: formData.get("removeUserId"),
+		};
+
+		try {
+			const response = await fetch("/removeUser", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(data),
+			});
+
+			const result = await response.json();
+
+			if (response.ok) {
+				alert(result.message);
+				form.reset();
+				// Remove the user from the displayed list
+				const userList = document.getElementById("removeUserList");
+				userList.innerHTML = "";
+				fetchUsers();
+			} else {
+				alert(result.message || "Error removing user");
+			}
+		} catch (error) {
+			console.error("Error:", error);
+			alert("An error occurred while removing the user");
+		}
+	});
 // Fetch and display users on page load
 fetchUsers();
