@@ -12,17 +12,7 @@ mongoose
 	.then((result) => app.listen(8080))
 	.catch((err) => console.log(err));
 
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
 
-app.use(express.static(path.join(__dirname)));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(
 	session({
 		secret: "12341234123412341234123412341234",
 		resave: false,
