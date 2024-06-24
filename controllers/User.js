@@ -1,8 +1,4 @@
-const User = require("../models/User");
-const Order = require("../models/Order");
-const path = require("path");
-const crypto = require("crypto");
-const nodemailer = require("nodemailer");
+
 
 const getUserById = (req, res) => {
 	const userId = req.params.userId;
