@@ -109,10 +109,66 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+const getAllCars = async (req, res) => {
+	try {
+		const cars = await Car.find();
+		res.json(cars);
+	} catch (error) {
+		console.error("Error fetching cars:", error);
+		res.status(500).json({ error: "Server error" });
+	}
+};
+
+const editCar = async (req, res) => {
+	try {
+		const { carId, carModel, manufacturYear, carDescription, carPrice } =
+			req.body;
+		const updatedCar = await Car.findByIdAndUpdate(
+			carId,
+			{
+				carModel,
+				manufacturYear,
+				carDescription,
+				carPrice,
+			},
+			{ new: true }
+		);
+
+		if (!updatedCar) {
+			return res.status(404).json({ message: "Car not found" });
+		}
+
+		res.json({ message: "Car updated successfully", car: updatedCar });
+	} catch (error) {
+		console.error("Error updating car:", error);
+		res.status(500).json({ message: "Server error" });
+	}
+};
+
+const removeCar = async (req, res) => {
+	try {
+		const { carId } = req.body;
+		const removedCar = await Car.findByIdAndDelete(carId);
+
+		if (!removedCar) {
+			return res.status(404).json({ message: "Car not found" });
+		}
+
+		res.json({ message: "Car removed successfully" });
+	} catch (error) {
+		console.error("Error removing car:", error);
+		res.status(500).json({ message: "Server error" });
+	}
+};
+
 module.exports = {
 	AddUser,
 	editUser,
 	removeUser,
 	addCar,
 	upload,
+	getAllCars,
+	editCar,
+	removeCar
 };
