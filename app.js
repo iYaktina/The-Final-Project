@@ -33,13 +33,6 @@ app.use(
 
 
 
-const indexRoutes = require("./routes/index");
-const adminRoutes = require("./routes/admin");
-const userRoutes = require("./routes/user");
-
-app.use("/", indexRoutes);
-app.use("/", adminRoutes);
-app.use("/", userRoutes);
 
 app.use((req, res) => {
 	const loggedInUser = req.session.user;
