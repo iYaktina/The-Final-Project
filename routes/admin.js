@@ -22,6 +22,7 @@ router.get("/users", async (req, res) => {
 		res.status(500).send("Server error");
 	}
 });
+router.post("/removeUser", Admin.removeUser);
 router.post("/editUser", Admin.editUser);
 router.post("/AddUser", Admin.AddUser);
 module.exports = router;
