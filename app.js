@@ -4,7 +4,13 @@ const path = require("path");
 const session = require("express-session");
 const app = express();
 
-
+const dbURI =
+	"mongodb+srv://webmongodb:miu12341234@cluster0.y4q8mqj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const bodyParser = require("body-parser");
+mongoose
+	.connect(dbURI)
+	.then((result) => app.listen(8080))
+	.catch((err) => console.log(err));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
