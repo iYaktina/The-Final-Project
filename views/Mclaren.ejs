@@ -68,7 +68,7 @@
 				<div class="shadow"></div>
 				<div>
 					<% cars.forEach((car, index) => { %>
-					<span style="--i: <%= index %>">
+					<span style="--i: 0">
 						<video
 							class="trailer <%= car.carBrand.toLowerCase() %>-<%= car.carModel.toLowerCase().replace(/ /g, '-') %> screen-video"
 							src="../public/assests/<%= car.carVideos[0] %>"
@@ -78,6 +78,33 @@
 						></video>
 					</span>
 					<% }); %>
+					<span style="--i: 1">
+						<video
+							class="screen-video"
+							src="../public/assests/Mclaren/trailer-1.mp4 "
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 2">
+						<video
+							class="screen-video"
+							src="../public/assests/Mclaren/trailer-2.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
+					<span style="--i: 3">
+						<video
+							class="screen-video"
+							src="../public/assests/Mclaren/trailer-3.mp4"
+							autoplay
+							loop
+							muted
+						></video>
+					</span>
 				</div>
 			</div>
 			<div class="gallery">
