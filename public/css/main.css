@@ -243,7 +243,7 @@ w el kalam kman ynzl m3ah 34an homa same class fa el line lw mznl4 el kalam m4 h
 /* w hena byb2a el car brand zat nfso  */
 .banner .content h1 {
 	font-family: "Racing Sans One", cursive;
-	font-size: 10em;
+	font-size: 6em;
 	color: #ffffff;
 	font-weight: 500;
 	line-height: 0.8em;
@@ -327,7 +327,7 @@ w el kalam kman ynzl m3ah 34an homa same class fa el line lw mznl4 el kalam m4 h
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	transform-style: preserve-3d;
 }
@@ -336,11 +336,11 @@ w el kalam kman ynzl m3ah 34an homa same class fa el line lw mznl4 el kalam m4 h
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 80%;
 	height: 100%;
 	overflow: hidden;
 	background: linear-gradient(transparent, var(--primary));
-	transform: rotateY(calc(90deg * var(--i))) translateZ(150px);
+	transform: rotateY(calc(90deg * var(--i))) translateZ(95px);
 }
 
 /* el shadow ely t7t el box ely feeh el videos  */
@@ -362,7 +362,7 @@ w el kalam kman ynzl m3ah 34an homa same class fa el line lw mznl4 el kalam m4 h
 .screen div span video {
 	position: absolute;
 	bottom: 0;
-	height: 75%;
+	height: 45%;
 	width: 100%;
 	transition: 0.5s;
 	object-fit: cover;
