@@ -246,7 +246,6 @@ document
 
 		const data = {
 			carId: formData.get("carId"),
-			carBrand: formData.get("carBrand"),
 			carModel: formData.get("carModel"),
 			manufacturYear: formData.get("manufacturYear"),
 			carDescription: formData.get("carDescription"),
