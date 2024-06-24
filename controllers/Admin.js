@@ -58,63 +58,22 @@ const editUser = async (req, res) => {
 		res.status(500).json({ message: "Server error" });
 	}
 };
-const GetUser = (req, res) => {
-	var query = { _id: req.params.id };
-	Users.findOne(query)
-		.then((result) => {
-			res.render("emp", {
-				emp: result,
-				user: req.session.user === undefined ? "" : req.session.user,
-			});
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
 
-const DeleteUser = (req, res) => {
-	Users.findByIdAndDelete(req.params.id)
-		.then((result) => {
-			fs.unlink(
-				path.join(__dirname, "../public/images/" + req.params.img),
-				(err) => {
-					if (err) {
-						throw err;
-					}
-					res.redirect("/admin/viewAll");
-				}
-			);
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
+const removeUser = async (req, res) => {
+	const { removeUserId } = req.body;
 
-const toAdmin = (req, res) => {
-	Users.findByIdAndUpdate(req.params.id, { Type: "admin" })
-		.then((result) => {
-			res.redirect("/admin/viewAll");
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-};
+	try {
+		await Users.findByIdAndDelete(removeUserId);
 
-const toClient = (req, res) => {
-	Users.findByIdAndUpdate(req.params.id, { Type: "client" })
-		.then((result) => {
-			res.redirect("/admin/viewAll");
-		})
-		.catch((err) => {
-			console.log(err);
-		});
+		res.status(200).json({ message: "User removed successfully" });
+	} catch (err) {
+		console.log(err);
+		res.status(500).json({ message: "Server error" });
+	}
 };
 
 module.exports = {
-	GetUser,
-	DeleteUser,
-	toAdmin,
-	toClient,
 	AddUser,
 	editUser,
+	removeUser,
 };
